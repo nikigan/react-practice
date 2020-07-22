@@ -1,8 +1,8 @@
 import React from "react";
 import "./AppRouter.scss";
 import { Route, Switch } from "react-router-dom";
-import ControlPanel from "../ControlPanel";
-import Home from "../Home";
+import ControlPanel from "../../pages/ControlPanel";
+import Home from "../../pages/Home";
 
 const AppRouter = () => {
   return (
