@@ -1,3 +1,12 @@
-.app-container {
-  padding: 80px 0;
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+
+.app {
+  padding-bottom: 80px;
+
+  .app-container {
+    position: relative;
+    padding: 20px 20px;
+    border-radius: 15px;
+  }
 }
