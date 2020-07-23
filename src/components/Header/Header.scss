@@ -1,0 +1,36 @@
+/*
+ * Header scss File
+*/
+
+.header {
+  &__links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__link-item {
+    display: block;
+    padding: 15px 25px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      transform: scale(0);
+      background: #1390e5;
+      transition: 0.5s;
+    }
+
+    &:hover {
+      &::after {
+        transform: scale(1);
+      }
+    }
+  }
+}
