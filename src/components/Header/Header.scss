@@ -1,4 +1,7 @@
 @import "src/utils/scss/variables";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/transitions";
 /*
  * Header scss File
 */
@@ -14,6 +17,11 @@
     display: flex;
     padding: 0;
     margin: 0;
+    @media (max-width: 992px) {
+      flex-flow: column;
+      justify-content: center;
+      text-align: center;
+    }
   }
 
   &__link-item,
@@ -45,6 +53,10 @@
     display: flex;
     align-items: center;
     margin-left: auto;
+
+    @media (max-width: 992px) {
+      justify-content: center;
+    }
   }
 
   &__user-name {

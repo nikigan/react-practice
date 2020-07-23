@@ -2,23 +2,33 @@ import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./PlacesList.scss";
+import { Spin } from "antd";
+import "antd/es/spin/style/css";
 import Place from "../Place";
 import { onPlacesFetch } from "../../store/places/actions";
+import Error from "../Error";
 
-// eslint-disable-next-line no-unused-vars,no-shadow
-const PlacesList = ({ placesList, fetching, error, onPlacesFetch }) => {
+const PlacesList = ({
+  placesList,
+  fetching,
+  error,
+  errorMessage,
+  onPlacesFetch: onPageLoaded,
+}) => {
   useEffect(() => {
-    console.log("effect");
-    onPlacesFetch();
-  }, [onPlacesFetch]);
+    onPageLoaded();
+  }, [onPageLoaded]);
+
+  const renderItem = fetching ? (
+    <Spin tip="Загрузка..." size="large" className="loading-spinner" />
+  ) : (
+    placesList.map((place) => <Place key={place.id} name={place.name} />)
+  );
 
   return (
     <div className="places-list">
       <div className="places-list__list">
-        {/* eslint-disable-next-line react/prop-types */}
-        {placesList.map((place) => (
-          <Place key={place.id} name={place.name} />
-        ))}
+        {error ? <Error message={errorMessage} /> : renderItem}
       </div>
       <button type="button" className="places-list__btn">
         Добавить заведение
@@ -31,6 +41,7 @@ PlacesList.propTypes = {
   placesList: PropTypes.arrayOf(PropTypes.object),
   fetching: PropTypes.bool,
   error: PropTypes.bool,
+  errorMessage: PropTypes.string,
   onPlacesFetch: PropTypes.func.isRequired,
 };
 
@@ -38,6 +49,7 @@ PlacesList.defaultProps = {
   placesList: [],
   fetching: false,
   error: false,
+  errorMessage: "",
 };
 
 const mapStateToProps = ({ places }) => {
@@ -45,6 +57,7 @@ const mapStateToProps = ({ places }) => {
     placesList: places.placesList,
     fetching: places.fetching,
     error: places.error,
+    errorMessage: places.errorMessage,
   };
 };
 export default connect(mapStateToProps, { onPlacesFetch })(PlacesList);
