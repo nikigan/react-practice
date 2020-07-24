@@ -4,10 +4,12 @@ export default class PlacesService {
   static getAllPlaces() {
     return new Promise((resolve, reject) => {
       setTimeout(async () => {
-        axios
-          .get("../places.json")
-          .then(({ data }) => resolve(data))
-          .catch((error) => reject(error));
+        try {
+          const response = await axios.get("../places.json");
+          resolve(response.data);
+        } catch (error) {
+          reject(error);
+        }
       }, 1500);
     });
   }

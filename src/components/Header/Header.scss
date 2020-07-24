@@ -1,7 +1,4 @@
-@import "src/utils/scss/variables";
-@import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/nav";
-@import "~bootstrap/scss/transitions";
+@import "../../assets/scss/variables";
 /*
  * Header scss File
 */
@@ -10,6 +7,43 @@
   &__container {
     display: flex;
     align-items: center;
+  }
+
+  &__menu {
+    display: flex;
+
+    @media (max-width: 992px) {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-flow: column;
+      z-index: 2;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 400px;
+      @media (max-width: 576px) {
+        width: 100%;
+      }
+      transform: translateX(-200%);
+      transition: all 0.5s;
+      background: $crystal-white;
+
+      &.expanded {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__menu-btn {
+    padding: 20px;
+    border: none;
+    background: none;
+
+    @media (min-width: 992px) {
+      display: none;
+    }
   }
   margin-bottom: 40px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
@@ -56,6 +90,7 @@
 
     @media (max-width: 992px) {
       justify-content: center;
+      margin: 0;
     }
   }
 

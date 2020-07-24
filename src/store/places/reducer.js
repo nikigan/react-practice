@@ -14,19 +14,16 @@ const places = (state = initialState, action) => {
         error: false,
         errorMessage: "",
       };
-    case "PLACES_FETCH_ENDED":
-      return {
-        ...state,
-        fetching: false,
-      };
     case "PLACES_FETCH_SUCCESS":
       return {
         ...state,
+        fetching: false,
         placesList: [...action.payload],
       };
     case "PLACES_FETCH_ERROR":
       return {
         ...state,
+        fetching: false,
         error: true,
         errorMessage: action.payload,
         placesList: [],

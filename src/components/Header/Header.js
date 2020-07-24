@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.scss";
-import { Container, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Container from "../Container";
 
 const Header = () => {
+  const [expandedClass, setExpandedClass] = useState("");
+
   const username = "User";
 
+  const onHeaderBlur = () => {
+    setExpandedClass("");
+  };
+
+  useEffect(() => document.addEventListener("mousedown", onHeaderBlur, false));
+
+  const onMenuClick = () => {
+    if (expandedClass !== "expanded") {
+      setExpandedClass("expanded");
+    } else {
+      setExpandedClass("");
+    }
+  };
+
   return (
-    <Navbar className="header" expand="lg">
+    <div className="header">
       <Container className="header__container">
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="ml-auto" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <button
+          type="button"
+          className="header__menu-btn"
+          onClick={onMenuClick}
+        >
+          Menu
+        </button>
+        <div className={`header__menu ${expandedClass}`} onBlur={onHeaderBlur}>
           <div className="header__links">
             <Link className="header__link-item" to="/">
               Главная
@@ -26,9 +48,9 @@ const Header = () => {
               Выйти
             </button>
           </div>
-        </Navbar.Collapse>
+        </div>
       </Container>
-    </Navbar>
+    </div>
   );
 };
 

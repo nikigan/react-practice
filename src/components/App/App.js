@@ -1,14 +1,14 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import AppRouter from "../../router/AppRouter";
 import Header from "../Header";
 import "./App.scss";
+import Container from "../Container";
 
 function App() {
   return (
     <div className="app">
       <Header />
-      <Container className="app-container">
+      <Container className="app__container">
         <AppRouter />
       </Container>
     </div>
