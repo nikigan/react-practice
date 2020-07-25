@@ -37,7 +37,7 @@ const Header = () => {
           Menu
         </button>
         <div
-          className={classNames("header__menu", { expanded: expanded })}
+          className={classNames("header__menu", { expanded })}
           onBlur={onHeaderBlur}
         >
           <div className="header__links">
