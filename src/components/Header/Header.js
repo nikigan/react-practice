@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import classNames from "classnames";
 import "./Header.scss";
+import classNames from "classnames";
 import { Link } from "react-router-dom";
 import Container from "../Container";
 
