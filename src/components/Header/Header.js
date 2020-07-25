@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 import Container from "../Container";
 
 const Header = () => {
-  const [expandedClass, setExpandedClass] = useState("");
+  const [expanded, setExpanded] = useState(false);
 
   const username = "User";
 
   const onHeaderBlur = () => {
-    setExpandedClass("");
+    setExpanded(false);
   };
 
-  useEffect(() => document.addEventListener("mousedown", onHeaderBlur, false));
+  useEffect(
+    () => document.addEventListener("mousedown", onHeaderBlur, false),
+    []
+  );
 
   const onMenuClick = () => {
-    if (expandedClass !== "expanded") {
-      setExpandedClass("expanded");
+    if (!expanded) {
+      setExpanded(true);
     } else {
-      setExpandedClass("");
+      setExpanded(false);
     }
   };
 
@@ -32,7 +36,10 @@ const Header = () => {
         >
           Menu
         </button>
-        <div className={`header__menu ${expandedClass}`} onBlur={onHeaderBlur}>
+        <div
+          className={classNames("header__menu", { expanded: expanded })}
+          onBlur={onHeaderBlur}
+        >
           <div className="header__links">
             <Link className="header__link-item" to="/">
               Главная
