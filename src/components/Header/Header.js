@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import classNames from "classnames";
 import "./Header.scss";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
 import Container from "../Container";
 
 const Header = () => {
