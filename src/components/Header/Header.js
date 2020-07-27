@@ -19,11 +19,7 @@ const Header = () => {
   );
 
   const onMenuClick = () => {
-    if (!expanded) {
-      setExpanded(true);
-    } else {
-      setExpanded(false);
-    }
+    setExpanded(!expanded);
   };
 
   return (
@@ -34,7 +30,7 @@ const Header = () => {
           className="header__menu-btn"
           onClick={onMenuClick}
         >
-          Menu
+          Меню
         </button>
         <div
           className={classNames("header__menu", { expanded })}
