@@ -1,3 +1,13 @@
-.app-container {
-  padding: 80px 0;
+.app {
+  padding-bottom: 80px;
+
+  &__container {
+    position: relative;
+    padding: 20px 20px;
+    border-radius: 15px;
+  }
+
+  .loading-spinner {
+    width: 100%;
+  }
 }

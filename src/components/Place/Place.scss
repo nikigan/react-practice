@@ -1,0 +1,41 @@
+@import "../../assets/scss/variables";
+/*
+ * Place scss File
+*/
+
+.place {
+  &__link {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 10px;
+    border: 1px solid $siberian-blue;
+    background: none;
+    cursor: pointer;
+    color: $dark;
+    font-weight: 500;
+    font-size: 18px;
+    transition: color 0.5s;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+      width: 0;
+      background: $siberian-blue;
+      transition: width 0.5s;
+    }
+
+    &:hover {
+      color: $crystal-white;
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}

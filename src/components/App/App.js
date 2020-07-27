@@ -1,29 +1,15 @@
-import React, { useEffect } from "react";
-import { Container } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import AppRouter from "../../router/AppRouter";
 import Header from "../Header";
 import "./App.scss";
-import onTestStore from "../../store/test/action";
+import Container from "../Container";
 
 function App() {
-  const tested = useSelector((state) => state.tested);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setTimeout(() => dispatch(onTestStore()), 1500);
-  }, [dispatch]);
-
   return (
     <div className="app">
       <Header />
-      <Container className="app-container">
+      <Container className="app__container">
         <AppRouter />
-        <span className="counter">
-          Store протестирован:
-          {tested ? "Да" : "Нет"}
-        </span>
       </Container>
     </div>
   );

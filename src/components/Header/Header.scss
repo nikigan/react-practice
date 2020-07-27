@@ -1,18 +1,67 @@
+@import "../../assets/scss/variables";
 /*
  * Header scss File
 */
 
 .header {
-  &__links {
+  &__container {
     display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    align-items: center;
   }
 
-  &__link-item {
+  &__menu {
+    display: flex;
+
+    @media (max-width: 992px) {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-flow: column;
+      z-index: 2;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 400px;
+      @media (max-width: 576px) {
+        width: 100%;
+      }
+      transform: translateX(-200%);
+      transition: all 0.5s;
+      background: $crystal-white;
+
+      &.expanded {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__menu-btn {
+    padding: 20px;
+    border: none;
+    background: none;
+
+    @media (min-width: 992px) {
+      display: none;
+    }
+  }
+  margin-bottom: 40px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  &__links {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    @media (max-width: 992px) {
+      flex-flow: column;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &__link-item,
+  &__logout {
     display: block;
-    padding: 15px 25px;
+    padding: 25px 25px;
     position: relative;
 
     &::after {
@@ -32,5 +81,27 @@
         transform: scale(1);
       }
     }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    @media (max-width: 992px) {
+      justify-content: center;
+      margin: 0;
+    }
+  }
+
+  &__user-name {
+    display: flex;
+    margin-left: 5px;
+    color: $siberian-blue;
+  }
+
+  &__logout {
+    border: none;
+    background: none;
   }
 }

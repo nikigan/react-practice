@@ -7,7 +7,7 @@ import Home from "../../pages/Home";
 const AppRouter = () => {
   return (
     <Switch>
-      <Route path="/control-panel" component={ControlPanel} />
+      <Route path="/owner/places" component={ControlPanel} />
       <Route path="/" component={Home} />
     </Switch>
   );
