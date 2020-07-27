@@ -24,8 +24,12 @@ const PlacesList = () => {
         {fetching && (
           <Spin tip="Загрузка..." size="large" className="loading-spinner" />
         )}
+        {!fetching && !error && placesList.length === 0 && (
+          <span className="places-list__empty">Список заведений пуст!</span>
+        )}
         {!fetching &&
           !error &&
+          placesList.length > 0 &&
           placesList.map((place) => <Place key={place.id} name={place.name} />)}
         {error && <Error message={errorMessage} />}
       </div>

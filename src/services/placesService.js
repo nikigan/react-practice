@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from "./serviceBase";
 
 export default class PlacesService {
-  static async getAllPlaces(ownerId = -1) {
-    const owner = ownerId < 0 ? "" : `&owner=${ownerId}`;
-
+  static async getAllPlaces(ownerId = null) {
     try {
-      const response = await axios.get(
-        `http://37.140.197.3/api/places/?format=json${owner}`
-      );
+      const response = await axios.get(`places/`, {
+        params: {
+          owner: ownerId,
+        },
+      });
       return response.data;
     } catch (error) {
       throw new Error(error);
