@@ -1,43 +1,22 @@
-export const onPlacesFetch = () => (dispatch) => {
+import placesService from "../../services/placesService";
+
+export const onPlacesFetch = () => async (dispatch) => {
   dispatch({
     type: "PLACES_FETCH_STARTED",
   });
 
-  const mockPlaces = [
-    {
-      id: 1,
-      name: "Заведение 1",
-    },
-    {
-      id: 2,
-      name: "Заведение 2",
-    },
-    {
-      id: 3,
-      name: "Заведение 3",
-    },
-    {
-      id: 4,
-      name: "Заведение 4",
-    },
-    {
-      id: 5,
-      name: "Заведение 5",
-    },
-    {
-      id: 6,
-      name: "Заведение 6",
-    },
-    {
-      id: 7,
-      name: "Заведение 7",
-    },
-  ];
-
-  dispatch({
-    type: "PLACES_FETCH_SUCCESS",
-    payload: mockPlaces,
-  });
+  try {
+    const places = await placesService.getAllPlaces();
+    dispatch({
+      type: "PLACES_FETCH_SUCCESS",
+      payload: places,
+    });
+  } catch (error) {
+    dispatch({
+      type: "PLACES_FETCH_ERROR",
+      payload: error.message,
+    });
+  }
 };
 
 export default {
