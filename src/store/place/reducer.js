@@ -1,3 +1,5 @@
+import placeActions from "../actionTypes";
+
 const initialState = {
   fetching: false,
   error: false,
@@ -9,7 +11,7 @@ const initialState = {
 
 const place = (state = initialState, action) => {
   switch (action.type) {
-    case "PLACE_FETCH_STARTED":
+    case placeActions.fetch.started:
       return {
         ...initialState,
         fetching: true,
@@ -17,13 +19,13 @@ const place = (state = initialState, action) => {
         errorMessage: "",
         success: false,
       };
-    case "PLACE_FETCH_SUCCESS":
+    case placeActions.fetch.success:
       return {
         ...state,
         fetching: false,
         ...action.payload,
       };
-    case "PLACE_FETCH_ERROR":
+    case placeActions.fetch.error:
       return {
         ...state,
         fetching: false,
@@ -31,25 +33,25 @@ const place = (state = initialState, action) => {
         errorMessage: action.payload,
       };
 
-    case "PLACE_IMAGE_CHANGED":
+    case placeActions.image.changed:
       return {
         ...state,
         image: action.payload,
       };
 
-    case "PLACE_INPUT_CHANGED":
+    case placeActions.input.changed:
       return {
         ...state,
         [action.payload.name]: action.payload.value,
       };
 
-    case "PLACE_TIME_CHANGED":
+    case placeActions.time.changed:
       return {
         ...state,
         from_hour: action.payload.fromHour,
         to_hour: action.payload.toHour,
       };
-    case "PLACE_SAVE_STARTED":
+    case placeActions.save.started:
       return {
         ...state,
         error: false,
@@ -58,14 +60,14 @@ const place = (state = initialState, action) => {
         fetching: true,
       };
 
-    case "PLACE_SAVE_SUCCESS":
+    case placeActions.save.success:
       return {
         ...state,
         fetching: false,
         success: true,
       };
 
-    case "PLACE_SAVE_ERROR":
+    case placeActions.save.error:
       return {
         ...state,
         fetching: false,
@@ -73,7 +75,7 @@ const place = (state = initialState, action) => {
         errorMessage: action.payload,
       };
 
-    case "PLACE_CLOSED":
+    case placeActions.closed:
       return {
         ...initialState,
       };

@@ -68,27 +68,18 @@ const EditPlace = () => {
   }, [address, name, setValue]);
 
   const submitHandler = (data) => {
+    const formData = {
+      name: data.name,
+      imageUpload: data.imageUpload[0],
+      fromHour,
+      toHour,
+      address: data.address,
+    };
+
     if (id) {
-      dispatch(
-        onPlaceEdit(
-          id,
-          data.name,
-          data.imageUpload[0],
-          fromHour,
-          toHour,
-          data.address
-        )
-      );
+      dispatch(onPlaceEdit({ placeId: id, ...formData }));
     } else {
-      dispatch(
-        onPlaceSave(
-          data.name,
-          data.imageUpload[0],
-          fromHour,
-          toHour,
-          data.address
-        )
-      );
+      dispatch(onPlaceSave(formData));
     }
   };
 
@@ -112,8 +103,16 @@ const EditPlace = () => {
   return (
     <div className="edit-place">
       <h1 className="edit-place__place-name">{`Заведение ${id || ""}`}</h1>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <FormProvider {...methods}>
+      <FormProvider
+        register={methods.register}
+        setValue={methods.setValue}
+        errors={methods.errors}
+        clearErrors={methods.clearErrors}
+        formState={methods.formState}
+        getValues={methods.getValues}
+        handleSubmit={methods.handleSubmit}
+        setError={methods.setError}
+      >
         <form
           className="edit-place__form"
           onSubmit={methods.handleSubmit(submitHandler)}

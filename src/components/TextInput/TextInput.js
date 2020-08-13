@@ -14,6 +14,8 @@ const TextInput = ({
 }) => {
   const { register, errors } = useFormContext();
 
+  const hasErrors = errors[name];
+
   return (
     <div className="edit-place__form-item text-input">
       <label className="text-input__label" htmlFor={name}>{`${label}:`}</label>
@@ -21,15 +23,13 @@ const TextInput = ({
         name={name}
         ref={register({ required: true, maxLength })}
         className={classNames("text-input__input", {
-          "text-input_invalid": errors[`${name}`],
+          "text-input_invalid": hasErrors,
         })}
         type="text"
         value={value}
         onChange={onChange}
       />
-      <p className="text-input__val-text">
-        {errors[`${name}`] && validationText}
-      </p>
+      <p className="text-input__val-text">{hasErrors && validationText}</p>
     </div>
   );
 };
