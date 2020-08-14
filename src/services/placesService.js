@@ -1,29 +1,23 @@
-import axios from "./serviceBase";
+import axios from "./serviceMethods";
 
-export default class PlacesService {
-  static async getAllPlaces(ownerId = null) {
+export default {
+  async getAllPlaces(ownerId = null) {
     try {
-      const response = await axios.get(`places/`, {
-        params: {
-          owner: ownerId,
-        },
-      });
+      const response = await axios.GET(`places/`, { owner: ownerId });
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async getPlace(placeId) {
+  },
+  async getPlace(placeId) {
     try {
-      const response = await axios.get(`places/${placeId}`);
+      const response = await axios.GET(`places/${placeId}`);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async addPlace(name, image, fromHour, toHour, address) {
+  },
+  async addPlace(name, image, fromHour, toHour, address) {
     const data = new FormData();
 
     data.set("name", name);
@@ -33,14 +27,13 @@ export default class PlacesService {
     data.set("address", address);
 
     try {
-      const response = await axios.post(`places/`, data);
+      const response = await axios.POST(`places/`, data);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async editPlace(placeId, name, image, fromHour, toHour, address) {
+  },
+  async editPlace(placeId, name, image, fromHour, toHour, address) {
     const data = new FormData();
 
     data.set("name", name);
@@ -52,19 +45,18 @@ export default class PlacesService {
     data.set("address", address);
 
     try {
-      const response = await axios.patch(`places/${placeId}`, data);
+      const response = await axios.PATCH(`places/${placeId}`, data);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async deletePlace(placeId) {
+  },
+  async deletePlace(placeId) {
     try {
-      const response = await axios.delete(`places/${placeId}`);
+      const response = await axios.DELETE(`places/${placeId}`);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-}
+  },
+};
