@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FormProvider, useForm } from "react-hook-form";
 import { Popconfirm, Spin } from "antd";
-import TextInput from "../TextInput";
-import ImageUpload from "../ImageUpload";
-import DishSelect from "../DishSelect";
+import TextInput from "../../components/TextInput";
+import ImageUpload from "../../components/ImageUpload";
+import DishSelect from "../../components/DishSelect";
 import "./EditDish.scss";
 import {
   onDishClosed,

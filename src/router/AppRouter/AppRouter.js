@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import ControlPanel from "../../pages/ControlPanel";
 import Home from "../../pages/Home";
 import EditPlace from "../../pages/EditPlace";
-import EditDish from "../../components/EditDish";
+import EditDish from "../../pages/EditDish";
 
 const AppRouter = () => {
   return (
