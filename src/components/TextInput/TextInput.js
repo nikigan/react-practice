@@ -16,12 +16,13 @@ const TextInput = ({
 
   const hasErrors = errors[name];
 
+  const labelText = `${label}:`;
+
   return (
     <div className="edit-place__form-item input-default">
-      <label
-        className="input-default__label"
-        htmlFor={name}
-      >{`${label}:`}</label>
+      <label className="input-default__label" htmlFor={name}>
+        {labelText}
+      </label>
       <input
         name={name}
         ref={register({ required: true, maxLength })}
