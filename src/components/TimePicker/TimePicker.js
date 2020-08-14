@@ -15,6 +15,7 @@ const TimePicker = ({ label, onChange, fromHour, toHour }) => {
         placeholder={["Время открытия", "Время закрытия"]}
         className="time-picker__picker"
         onChange={onChange}
+        allowClear={false}
         value={[moment(fromHour, "HH:mm:ss"), moment(toHour, "HH:mm:ss")]}
       />
     </div>

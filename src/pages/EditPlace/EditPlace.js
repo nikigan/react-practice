@@ -70,7 +70,7 @@ const EditPlace = () => {
   const submitHandler = (data) => {
     const formData = {
       name: data.name,
-      imageUpload: data.imageUpload[0],
+      image: data.imageUpload[0],
       fromHour,
       toHour,
       address: data.address,
@@ -107,11 +107,6 @@ const EditPlace = () => {
         register={methods.register}
         setValue={methods.setValue}
         errors={methods.errors}
-        clearErrors={methods.clearErrors}
-        formState={methods.formState}
-        getValues={methods.getValues}
-        handleSubmit={methods.handleSubmit}
-        setError={methods.setError}
       >
         <form
           className="edit-place__form"
