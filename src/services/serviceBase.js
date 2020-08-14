@@ -6,6 +6,7 @@ const instance = axios.create({
   baseURL: "http://37.140.197.3/api/",
   headers: {
     Authorization: `Token ${USER_TOKEN}`,
+    "Content-type": "multipart/form-data",
   },
 });
 

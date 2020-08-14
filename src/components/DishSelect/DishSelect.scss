@@ -5,6 +5,7 @@
 
 .dish-select {
   display: flex;
+  align-items: center;
   /* properties here */
 
   &__label {
@@ -26,5 +27,9 @@
   &__item {
     border-bottom: 1px solid $siberian-blue;
     margin-bottom: 10px;
+  }
+
+  &__btn {
+    margin-left: 30px;
   }
 }

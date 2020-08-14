@@ -12,7 +12,7 @@ import {
   onPlaceFetch,
   onPlaceSave,
   onTimeChanged,
-  onPlaceClosed,
+  // onPlaceClosed,
   onPlaceDelete,
 } from "../../store/place/action";
 import TextInput from "../../components/TextInput";
@@ -39,6 +39,8 @@ const EditPlace = () => {
     to_hour: toHour,
     address,
     fetching,
+    placeId,
+    dishes,
   } = useSelector((state) => state.place);
 
   const timeHandler = (_, timeString) => {
@@ -50,13 +52,16 @@ const EditPlace = () => {
   };
 
   useEffect(() => {
-    if (id) {
+    if (id !== placeId) {
       dispatch(onPlaceFetch(id));
     }
-    return () => {
-      dispatch(onPlaceClosed());
-    };
-  }, [dispatch, id]);
+    // TODO: Наладить очистку
+    // return () => {
+    //   if (id) {
+    //     dispatch(onPlaceClosed());
+    //   }
+    // };
+  }, [dispatch, id, placeId]);
 
   useEffect(() => {
     if (name) {
@@ -88,17 +93,6 @@ const EditPlace = () => {
   };
 
   const buttonText = id ? "Изменить" : "Сохранить";
-
-  const dishes = [
-    {
-      id: 1,
-      name: "Блюдо 1",
-    },
-    {
-      id: 2,
-      name: "Блюдо 1",
-    },
-  ];
 
   return (
     <div className="edit-place">
