@@ -1,17 +1,10 @@
-import PropTypes from "prop-types";
 import React from "react";
+import "./NumberInput.scss";
 import classNames from "classnames";
-import "./TextInput.scss";
 import { useFormContext } from "react-hook-form";
+import PropTypes from "prop-types";
 
-const TextInput = ({
-  value,
-  onChange,
-  label,
-  name,
-  validationText,
-  maxLength,
-}) => {
+const NumberInput = ({ value, onChange, label, name, validationText }) => {
   const { register, errors } = useFormContext();
 
   const hasErrors = errors[name];
@@ -24,11 +17,13 @@ const TextInput = ({
       >{`${label}:`}</label>
       <input
         name={name}
-        ref={register({ required: true, maxLength })}
+        ref={register({ required: true })}
         className={classNames("input-default__input", {
-          "input-default_invalid": hasErrors,
+          "text-input_invalid": hasErrors,
         })}
-        type="text"
+        type="number"
+        step="0.1"
+        min="1"
         value={value}
         onChange={onChange}
       />
@@ -37,21 +32,19 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
-
-TextInput.propTypes = {
-  value: PropTypes.string,
+NumberInput.propTypes = {
+  value: PropTypes.number,
   onChange: PropTypes.func,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
-  maxLength: PropTypes.number,
   validationText: PropTypes.string,
 };
 
-TextInput.defaultProps = {
-  value: "",
+NumberInput.defaultProps = {
+  value: 0,
   onChange: null,
   label: "Поле для ввода",
-  maxLength: null,
   validationText: "",
 };
+
+export default NumberInput;

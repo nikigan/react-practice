@@ -16,18 +16,20 @@ const onPlaceFetch = (placeId) => async (dispatch) => {
       type: placeActions.fetch.success,
       payload: { placeId, ...place },
     });
-
-    const dishes = await dishService.getDishes(placeId);
-    dispatch({
-      type: placeActions.dishes.fetched,
-      payload: dishes,
-    });
   } catch (error) {
     dispatch({
       type: placeActions.fetch.error,
       payload: error.message,
     });
   }
+};
+
+const onDishesFetch = (placeId) => async (dispatch) => {
+  const dishes = await dishService.getDishes(placeId);
+  dispatch({
+    type: placeActions.dishes.fetched,
+    payload: dishes,
+  });
 };
 
 const onPlaceSave = ({ name, image, fromHour, toHour, address }) => async (
@@ -135,4 +137,5 @@ export {
   onPlaceEdit,
   onPlaceClosed,
   onPlaceDelete,
+  onDishesFetch,
 };

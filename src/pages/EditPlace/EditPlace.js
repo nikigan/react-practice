@@ -14,12 +14,13 @@ import {
   onTimeChanged,
   // onPlaceClosed,
   onPlaceDelete,
+  onDishesFetch,
 } from "../../store/place/action";
 import TextInput from "../../components/TextInput";
 import ImageUpload from "../../components/ImageUpload";
 import TimePicker from "../../components/TimePicker";
 import "antd/es/time-picker/style/css";
-import DishSelect from "../../components/DishSelect";
+import ItemSelect from "../../components/ItemSelect";
 
 const EditPlace = () => {
   const { id } = useParams();
@@ -55,13 +56,13 @@ const EditPlace = () => {
     if (id !== placeId) {
       dispatch(onPlaceFetch(id));
     }
-    // TODO: Наладить очистку
-    // return () => {
-    //   if (id) {
-    //     dispatch(onPlaceClosed());
-    //   }
-    // };
   }, [dispatch, id, placeId]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(onDishesFetch(id));
+    }
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (name) {
@@ -132,7 +133,12 @@ const EditPlace = () => {
             onChange={inputHandler}
             validationText="Название должно быть длиннее 1 символа"
           />
-          <DishSelect dishes={dishes} label="Список блюд" />
+          <ItemSelect
+            items={dishes}
+            label="Список блюд"
+            path="dishes"
+            buttonText="Добавить блюдо"
+          />
           <button
             className="edit-place__button"
             type="submit"

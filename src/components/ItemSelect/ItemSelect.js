@@ -5,19 +5,19 @@ import { Link } from "react-router-dom";
 
 // TODO: Рефактор компонента в обобщенный
 
-const DishSelect = ({ label, dishes }) => {
+const ItemSelect = ({ label, items, path, buttonText }) => {
   return (
     <div className="dish-select edit-place__form-item">
       <span className="dish-select__label">{label}</span>
       <div className="dish-select__container">
-        {dishes.map((dish) => {
+        {items.map((item) => {
           return (
             <Link
-              key={dish.id}
+              key={item.id}
               className="dish-select__item"
-              to={`/owner/dishes/${dish.id}`}
+              to={`/owner/${path}/${item.id}`}
             >
-              {dish.name}
+              {item.name}
             </Link>
           );
         })}
@@ -27,20 +27,23 @@ const DishSelect = ({ label, dishes }) => {
         className="btn dish-select__btn"
         to="/owner/dishes/new"
       >
-        Добавить блюдо
+        {buttonText}
       </Link>
     </div>
   );
 };
 
-export default DishSelect;
+export default ItemSelect;
 
-DishSelect.propTypes = {
-  dishes: PropTypes.arrayOf(PropTypes.object),
+ItemSelect.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object),
   label: PropTypes.string,
+  path: PropTypes.string.isRequired,
+  buttonText: PropTypes.string,
 };
 
-DishSelect.defaultProps = {
-  dishes: [],
+ItemSelect.defaultProps = {
+  items: [],
   label: "Список",
+  buttonText: "Добавить",
 };

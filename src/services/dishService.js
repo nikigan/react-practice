@@ -1,29 +1,23 @@
-import axios from "./serviceBase";
+import axios from "./serviceMethods";
 
-export default class dishService {
-  static async getDishes(placeId) {
+export default {
+  async getDishes(placeId) {
     try {
-      const response = await axios.get(`dishes/`, {
-        params: {
-          place: placeId,
-        },
-      });
+      const response = await axios.GET(`dishes/`, { place: placeId });
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async getDish(dishId) {
+  },
+  async getDish(dishId) {
     try {
-      const response = await axios.get(`dishes/${dishId}`);
+      const response = await axios.GET(`dishes/${dishId}`);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async addDish(name, image, price, placeId, ingredients) {
+  },
+  async addDish(name, image, price, placeId, ingredients) {
     const data = new FormData();
 
     data.set("name", name);
@@ -38,14 +32,13 @@ export default class dishService {
     }
 
     try {
-      const response = await axios.post(`dishes/`, data);
+      const response = await axios.POST(`dishes/`, data);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async editDish(name, image, price, placeId, ingredients, dishId) {
+  },
+  async editDish(name, image, price, placeId, ingredients, dishId) {
     const data = new FormData();
 
     data.set("name", name);
@@ -62,19 +55,18 @@ export default class dishService {
     }
 
     try {
-      const response = await axios.patch(`dishes/${dishId}`, data);
+      const response = await axios.PATCH(`dishes/${dishId}`, data);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-
-  static async deleteDish(dishId) {
+  },
+  async deleteDish(dishId) {
     try {
-      const response = await axios.delete(`dish/${dishId}`);
+      const response = await axios.DELETE(`dishes/${dishId}`);
       return response.data;
     } catch (error) {
       throw new Error(error);
     }
-  }
-}
+  },
+};

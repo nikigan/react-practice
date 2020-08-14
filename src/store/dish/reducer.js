@@ -33,7 +33,7 @@ const dish = (state = initialState, action) => {
     case dishActions.image.changed:
       return {
         ...state,
-        image: action.payload,
+        photo: action.payload,
       };
 
     case dishActions.input.changed:

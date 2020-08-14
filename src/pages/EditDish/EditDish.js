@@ -5,7 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Popconfirm, Spin } from "antd";
 import TextInput from "../../components/TextInput";
 import ImageUpload from "../../components/ImageUpload";
-import DishSelect from "../../components/DishSelect";
+import ItemSelect from "../../components/ItemSelect";
 import "./EditDish.scss";
 import {
   onDishClosed,
@@ -16,6 +16,7 @@ import {
   onImageChange,
   onDishDelete,
 } from "../../store/dish/action";
+import NumberInput from "../../components/NumberInput";
 
 const EditDish = () => {
   const { id } = useParams();
@@ -45,7 +46,12 @@ const EditDish = () => {
 
     if (id) {
       dispatch(
-        onDishEdit({ id, ...formData, placeId, ingredients: mockIngredients })
+        onDishEdit({
+          dishId: id,
+          ...formData,
+          placeId,
+          ingredients: mockIngredients,
+        })
       );
     } else {
       dispatch(
@@ -109,14 +115,19 @@ const EditDish = () => {
             image={image}
             onChange={(newImage) => dispatch(onImageChange(newImage))}
           />
-          <TextInput
+          <NumberInput
             label="Цена"
             name="price"
             value={price}
             onChange={inputHandler}
-            validationText="Название должно быть длиннее 1 символа"
+            validationText="Введите натуральное число"
           />
-          <DishSelect dishes={ingredients} label="Список ингредиентов" />
+          <ItemSelect
+            items={ingredients}
+            label="Список ингредиентов"
+            path="ingredients"
+            buttonText="Добавить ингредиент"
+          />
           <button
             className="edit-place__button"
             type="submit"

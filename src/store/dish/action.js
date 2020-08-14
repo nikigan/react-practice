@@ -48,7 +48,7 @@ const onDishDelete = (dishId) => async (dispatch) => {
   try {
     await dishService.deleteDish(dishId);
 
-    message.success("Заведение удалено");
+    message.success("Блюдо удалено");
     history.goBack();
   } catch (error) {
     dispatch({
