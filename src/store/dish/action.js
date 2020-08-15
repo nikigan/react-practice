@@ -58,6 +58,37 @@ const onDishDelete = (dishId) => async (dispatch) => {
   }
 };
 
+const onIngredientDelete = (
+  deleteIngredientId,
+  ingredients,
+  placeId,
+  dishId
+) => async (dispatch) => {
+  const newIngredients = ingredients.filter((i) => i.id !== deleteIngredientId);
+
+  try {
+    await dishService.editDish(
+      null,
+      null,
+      null,
+      placeId,
+      newIngredients,
+      dishId
+    );
+
+    dispatch({
+      type: dishActions.ingredient.deleted,
+      payload: deleteIngredientId,
+    });
+
+    message.success("Ингредиент удален");
+  } catch (error) {
+    dispatch({
+      type: dishActions.delete.error,
+    });
+  }
+};
+
 const onDishEdit = ({
   dishId,
   name,
@@ -120,4 +151,5 @@ export {
   onDishEdit,
   onDishClosed,
   onDishDelete,
+  onIngredientDelete,
 };

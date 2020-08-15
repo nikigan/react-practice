@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,9 +16,15 @@ import {
   onInputChange,
   onImageChange,
   onDishDelete,
+  onIngredientDelete,
 } from "../../store/dish/action";
 import NumberInput from "../../components/NumberInput";
 import Modal from "../../components/Modal";
+import {
+  onIngredientModalClose,
+  onIngredientModalShow,
+} from "../../store/ingredient/actions";
+import IngredientsList from "../../components/IngredientsList";
 
 const EditDish = () => {
   const { id } = useParams();
@@ -43,21 +50,17 @@ const EditDish = () => {
       price: data.price,
     };
 
-    const mockIngredients = [30, 27, 6];
-
     if (id) {
       dispatch(
         onDishEdit({
           dishId: id,
           ...formData,
           placeId,
-          ingredients: mockIngredients,
+          ingredients,
         })
       );
     } else {
-      dispatch(
-        onDishSave({ ...formData, placeId, ingredients: mockIngredients })
-      );
+      dispatch(onDishSave({ ...formData, placeId, ingredients }));
     }
   };
 
@@ -90,6 +93,22 @@ const EditDish = () => {
   };
 
   const buttonText = id ? "Изменить" : "Добавить";
+
+  const { modalOpened, ingredientsList } = useSelector(
+    (state) => state.ingredient
+  );
+
+  const onIngredientClick = (ingredientId) => {
+    dispatch(onIngredientDelete(ingredientId, ingredients, placeId, id));
+  };
+
+  const onIngredientNewClick = () => {
+    dispatch(onIngredientModalShow());
+  };
+
+  const onIngredientModalClosed = () => {
+    dispatch(onIngredientModalClose());
+  };
 
   return (
     <div className="edit-dish">
@@ -126,7 +145,8 @@ const EditDish = () => {
           <ItemSelect
             items={ingredients}
             label="Список ингредиентов"
-            path="ingredients"
+            onItemClick={onIngredientClick}
+            onNewClick={onIngredientNewClick}
             buttonText="Добавить ингредиент"
           />
           <button
@@ -154,7 +174,9 @@ const EditDish = () => {
           )}
         </form>
       </FormProvider>
-      <Modal />
+      <Modal opened={modalOpened} onClose={onIngredientModalClosed}>
+        <IngredientsList items={ingredientsList} />
+      </Modal>
     </div>
   );
 };

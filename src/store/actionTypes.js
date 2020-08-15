@@ -41,6 +41,9 @@ const dish = {
   delete: {
     error: "DISH_DELETE_ERROR",
   },
+  ingredient: {
+    deleted: "DISH_INGREDIENT_DELETED",
+  },
   image: {
     changed: "DISH_IMAGE_CHANGED",
   },
@@ -50,4 +53,28 @@ const dish = {
   closed: "DISH_CLOSED",
 };
 
-export { place, dish };
+const ingredient = {
+  fetch: {
+    started: "INGREDIENT_FETCH_STARTED",
+    success: "INGREDIENT_FETCH_SUCCESS",
+    error: "INGREDIENT_FETCH_ERROR",
+  },
+  save: {
+    started: "INGREDIENT_SAVE_STARTED",
+    success: "INGREDIENT_SAVE_SUCCESS",
+    error: "INGREDIENT_SAVE_ERROR",
+  },
+  delete: {
+    error: "INGREDIENT_DELETE_ERROR",
+  },
+  input: {
+    changed: "INGREDIENT_INPUT_CHANGED",
+  },
+  closed: "INGREDIENT_CLOSED",
+  modal: {
+    opened: "INGREDIENT_MODAL_OPENED",
+    closed: "INGREDIENT_MODAL_CLOSED",
+  },
+};
+
+export { place, dish, ingredient };

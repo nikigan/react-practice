@@ -3,7 +3,7 @@
 */
 @import "src/assets/scss/variables";
 
-.dish-select {
+.item-select {
   display: flex;
   align-items: center;
   /* properties here */
@@ -25,11 +25,16 @@
   }
 
   &__item {
+    border: none;
+    background: $crystal-white;
+    text-align: left;
+    cursor: pointer;
     border-bottom: 1px solid $siberian-blue;
     margin-bottom: 10px;
   }
 
   &__btn {
     margin-left: 30px;
+    cursor: pointer;
   }
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "./EditPlace.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Popconfirm, Spin } from "antd";
@@ -95,6 +95,16 @@ const EditPlace = () => {
 
   const buttonText = id ? "Изменить" : "Сохранить";
 
+  const history = useHistory();
+
+  const onDishClick = (dishId) => {
+    history.push(`/owner/dishes/${dishId}`);
+  };
+
+  const onDishAdd = () => {
+    history.push("/owner/dishes/new");
+  };
+
   return (
     <div className="edit-place">
       <h1 className="edit-place__place-name">{`Заведение ${id || ""}`}</h1>
@@ -136,7 +146,8 @@ const EditPlace = () => {
           <ItemSelect
             items={dishes}
             label="Список блюд"
-            path="dishes"
+            onItemClick={onDishClick}
+            onNewClick={onDishAdd}
             buttonText="Добавить блюдо"
           />
           <button

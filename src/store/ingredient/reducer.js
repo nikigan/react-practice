@@ -1,28 +1,29 @@
-import { dish as dishActions } from "../actionTypes";
+import { ingredient as ingredientActions } from "../actionTypes";
 
 const initialState = {
   fetching: false,
   error: false,
   success: false,
-  ingredients: [],
+  modalOpened: false,
+  ingredientsList: [],
 };
 
-const dish = (state = initialState, action) => {
+const ingredient = (state = initialState, action) => {
   switch (action.type) {
-    case dishActions.fetch.started:
+    case ingredientActions.fetch.started:
       return {
         ...initialState,
         fetching: true,
         error: false,
         success: false,
       };
-    case dishActions.fetch.success:
+    case ingredientActions.fetch.success:
       return {
         ...state,
         fetching: false,
-        ...action.payload,
+        ingredientsList: [...action.payload],
       };
-    case dishActions.fetch.error:
+    case ingredientActions.fetch.error:
       return {
         ...state,
         fetching: false,
@@ -30,19 +31,13 @@ const dish = (state = initialState, action) => {
         errorMessage: action.payload,
       };
 
-    case dishActions.image.changed:
-      return {
-        ...state,
-        photo: action.payload,
-      };
-
-    case dishActions.input.changed:
+    case ingredientActions.input.changed:
       return {
         ...state,
         [action.payload.name]: action.payload.value,
       };
 
-    case dishActions.save.started:
+    case ingredientActions.save.started:
       return {
         ...state,
         error: false,
@@ -50,14 +45,14 @@ const dish = (state = initialState, action) => {
         fetching: true,
       };
 
-    case dishActions.save.success:
+    case ingredientActions.save.success:
       return {
         ...state,
         fetching: false,
         success: true,
       };
 
-    case dishActions.save.error:
+    case ingredientActions.save.error:
       return {
         ...state,
         fetching: false,
@@ -65,19 +60,21 @@ const dish = (state = initialState, action) => {
         errorMessage: action.payload,
       };
 
-    case dishActions.ingredient.deleted:
+    case ingredientActions.modal.opened:
       return {
         ...state,
-        ingredients: state.ingredients.filter((i) => i.id !== action.payload),
+        modalOpened: true,
       };
 
-    case dishActions.closed:
+    case ingredientActions.modal.closed:
       return {
-        ...initialState,
+        ...state,
+        modalOpened: false,
       };
+
     default:
       return state;
   }
 };
 
-export default dish;
+export default ingredient;
