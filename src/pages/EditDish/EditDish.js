@@ -17,6 +17,7 @@ import {
   onDishDelete,
 } from "../../store/dish/action";
 import NumberInput from "../../components/NumberInput";
+import Modal from "../../components/Modal";
 
 const EditDish = () => {
   const { id } = useParams();
@@ -153,6 +154,7 @@ const EditDish = () => {
           )}
         </form>
       </FormProvider>
+      <Modal />
     </div>
   );
 };
