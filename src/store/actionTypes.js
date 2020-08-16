@@ -43,6 +43,7 @@ const dish = {
   },
   ingredient: {
     deleted: "DISH_INGREDIENT_DELETED",
+    fetched: "DISH_INGREDIENTS_FETCHED",
   },
   image: {
     changed: "DISH_IMAGE_CHANGED",
@@ -74,6 +75,10 @@ const ingredient = {
   modal: {
     opened: "INGREDIENT_MODAL_OPENED",
     closed: "INGREDIENT_MODAL_CLOSED",
+  },
+  createModal: {
+    opened: "CREATE_MODAL_OPENED",
+    closed: "CREATE_MODAL_CLOSED",
   },
   selected: "INGREDIENT_SELECTED",
 };

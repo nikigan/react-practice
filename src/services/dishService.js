@@ -26,7 +26,7 @@ export default {
     data.set("place", placeId);
 
     if (Array.isArray(ingredients)) {
-      ingredients.forEach((i) => data.append("ingredients", i));
+      ingredients.forEach((i) => data.append("ingredients", i.id));
     } else {
       data.append("ingredients", ingredients);
     }

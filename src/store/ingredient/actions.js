@@ -1,6 +1,9 @@
 import { message } from "antd";
 import "antd/es/message/style/css";
-import { ingredient as ingredientActions } from "../actionTypes";
+import {
+  ingredient as ingredientActions,
+  dish as dishActions,
+} from "../actionTypes";
 import ingredientService from "../../services/ingredientService";
 
 const onIngredientsFetch = () => async (dispatch) => {
@@ -22,16 +25,18 @@ const onIngredientsFetch = () => async (dispatch) => {
   }
 };
 
-const onIngredientSave = ({ name, calories }) => async (dispatch) => {
+const onIngredientSave = (name, calories) => async (dispatch) => {
   dispatch({
     type: ingredientActions.save.started,
   });
   try {
-    await ingredientService.addDish(name, calories);
+    await ingredientService.addIngredient(name, calories);
     dispatch({
       type: ingredientActions.save.success,
     });
     message.success("Данные сохранены");
+
+    dispatch(onIngredientsFetch());
   } catch (error) {
     dispatch({
       type: ingredientActions.save.error,
@@ -46,14 +51,24 @@ const onIngredientModalShow = () => async (dispatch) => {
     type: ingredientActions.modal.opened,
   });
 
-  const ingredients = await ingredientService.getIngredients();
+  try {
+    const ingredients = await ingredientService.getIngredients();
 
-  ingredients.map((item) => ({ ...item, selected: false }));
+    ingredients.map((item) => ({
+      ...item,
+      selected: false,
+    }));
 
-  dispatch({
-    type: ingredientActions.fetch.success,
-    payload: ingredients,
-  });
+    dispatch({
+      type: ingredientActions.fetch.success,
+      payload: ingredients,
+    });
+  } catch (error) {
+    dispatch({
+      type: ingredientActions.fetch.error,
+    });
+    message.error(error.message);
+  }
 };
 
 const onIngredientSelect = (ingredients, ingredientId) => (dispatch) => {
@@ -72,6 +87,19 @@ const onIngredientSelect = (ingredients, ingredientId) => (dispatch) => {
   });
 };
 
+const onIngredientsAdd = (ingredients) => (dispatch) => {
+  const newIngredients = ingredients.filter((i) => i.selected);
+
+  dispatch({
+    type: dishActions.ingredient.fetched,
+    payload: newIngredients,
+  });
+
+  dispatch({
+    type: ingredientActions.modal.closed,
+  });
+};
+
 const onIngredientModalClose = () => (dispatch) => {
   dispatch({
     type: ingredientActions.modal.closed,
@@ -85,6 +113,18 @@ const onInputChange = (event) => (dispatch) => {
   });
 };
 
+const onCreateModalShow = () => (dispatch) => {
+  dispatch({
+    type: ingredientActions.createModal.opened,
+  });
+};
+
+const onCreateModalClose = () => (dispatch) => {
+  dispatch({
+    type: ingredientActions.createModal.closed,
+  });
+};
+
 export {
   onIngredientSave,
   onIngredientsFetch,
@@ -92,4 +132,7 @@ export {
   onIngredientSelect,
   onIngredientModalShow,
   onIngredientModalClose,
+  onIngredientsAdd,
+  onCreateModalShow,
+  onCreateModalClose,
 };

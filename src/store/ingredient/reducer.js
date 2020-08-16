@@ -5,6 +5,7 @@ const initialState = {
   error: false,
   success: false,
   modalOpened: false,
+  createModalOpened: false,
   ingredientsList: [],
 };
 
@@ -12,7 +13,7 @@ const ingredient = (state = initialState, action) => {
   switch (action.type) {
     case ingredientActions.fetch.started:
       return {
-        ...initialState,
+        ...state,
         fetching: true,
         error: false,
         success: false,
@@ -50,6 +51,7 @@ const ingredient = (state = initialState, action) => {
         ...state,
         fetching: false,
         success: true,
+        createModalOpened: false,
       };
 
     case ingredientActions.save.error:
@@ -76,6 +78,18 @@ const ingredient = (state = initialState, action) => {
       return {
         ...state,
         ingredientsList: action.payload,
+      };
+
+    case ingredientActions.createModal.opened:
+      return {
+        ...state,
+        createModalOpened: true,
+      };
+
+    case ingredientActions.createModal.closed:
+      return {
+        ...state,
+        createModalOpened: false,
       };
 
     default:
