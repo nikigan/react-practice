@@ -20,6 +20,8 @@ const Modal = ({ opened, onClose, children }) => {
     };
   }, [onClose]);
 
+  if (!opened) return null;
+
   return createPortal(
     <div className={classNames("modal", { show: opened })}>
       <div

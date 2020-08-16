@@ -75,6 +75,7 @@ const ingredient = {
     opened: "INGREDIENT_MODAL_OPENED",
     closed: "INGREDIENT_MODAL_CLOSED",
   },
+  selected: "INGREDIENT_SELECTED",
 };
 
 export { place, dish, ingredient };

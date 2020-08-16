@@ -94,9 +94,7 @@ const EditDish = () => {
 
   const buttonText = id ? "Изменить" : "Добавить";
 
-  const { modalOpened, ingredientsList } = useSelector(
-    (state) => state.ingredient
-  );
+  const { modalOpened } = useSelector((state) => state.ingredient);
 
   const onIngredientClick = (ingredientId) => {
     dispatch(onIngredientDelete(ingredientId, ingredients, placeId, id));
@@ -175,7 +173,7 @@ const EditDish = () => {
         </form>
       </FormProvider>
       <Modal opened={modalOpened} onClose={onIngredientModalClosed}>
-        <IngredientsList items={ingredientsList} />
+        <IngredientsList />
       </Modal>
     </div>
   );

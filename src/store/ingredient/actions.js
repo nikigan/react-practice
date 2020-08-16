@@ -48,9 +48,27 @@ const onIngredientModalShow = () => async (dispatch) => {
 
   const ingredients = await ingredientService.getIngredients();
 
+  ingredients.map((item) => ({ ...item, selected: false }));
+
   dispatch({
     type: ingredientActions.fetch.success,
     payload: ingredients,
+  });
+};
+
+const onIngredientSelect = (ingredients, ingredientId) => (dispatch) => {
+  const changedIngredient = ingredients.filter((i) => i.id === ingredientId)[0];
+  const idx = ingredients.indexOf(changedIngredient);
+
+  changedIngredient.selected = !changedIngredient.selected;
+
+  dispatch({
+    type: ingredientActions.selected,
+    payload: [
+      ...ingredients.slice(null, idx),
+      changedIngredient,
+      ...ingredients.slice(idx + 1, ingredients.length),
+    ],
   });
 };
 
@@ -71,6 +89,7 @@ export {
   onIngredientSave,
   onIngredientsFetch,
   onInputChange,
+  onIngredientSelect,
   onIngredientModalShow,
   onIngredientModalClose,
 };

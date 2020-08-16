@@ -1,8 +1,25 @@
 /*
  * IngredientsList scss File
 */
+@import "src/assets/scss/variables";
 
 .ingredients-list {
   overflow: auto;
   max-height: 500px;
+
+  &__item {
+    display: block;
+    border: none;
+    background: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+
+    &_selected {
+      background: $siberian-blue;
+      color: $crystal-white;
+    }
+  }
 }

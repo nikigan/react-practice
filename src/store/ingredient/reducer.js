@@ -72,6 +72,12 @@ const ingredient = (state = initialState, action) => {
         modalOpened: false,
       };
 
+    case ingredientActions.selected:
+      return {
+        ...state,
+        ingredientsList: action.payload,
+      };
+
     default:
       return state;
   }
