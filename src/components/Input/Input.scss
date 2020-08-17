@@ -1,0 +1,14 @@
+/*
+ * Input scss File
+*/
+
+.input {
+  /* propertys here */
+  &_error {
+    border-bottom-color: #ff0808;
+  }
+
+  &__error {
+    color: #ff0808;
+  }
+}

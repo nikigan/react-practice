@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import "antd/es/spin/style/css";
 import { onLogin, onRegister } from "../../store/auth/actions";
+import Input from "../../components/Input";
 
 const LoginPage = () => {
   const { register, handleSubmit, errors, getValues } = useForm();
@@ -28,21 +29,20 @@ const LoginPage = () => {
   const { loading } = useSelector((state) => state.auth);
 
   const secondPasswordInput = (
-    <>
-      <input
-        name="passwordRepeat"
-        type="password"
-        className="login-form__input"
-        ref={register({
-          required: true,
-          validate: (value) => {
-            const { password } = getValues();
-            return password === value;
-          },
-        })}
-      />
-      {errors.passwordRepeat && "Пароли должны совпадать"}
-    </>
+    <Input
+      name="passwordRepeat"
+      type="password"
+      className="login-form__input"
+      ref={register({
+        required: true,
+        validate: (value) => {
+          const { password } = getValues();
+          return password === value;
+        },
+      })}
+      errorMessage="Пароли должны совпадать"
+      errors={errors}
+    />
   );
 
   return (
@@ -53,20 +53,22 @@ const LoginPage = () => {
             <h3 className="login-form__header">
               {registerPage ? "Регистрация в системе" : "Вход в систему"}
             </h3>
-            <input
+            <Input
               name="username"
               type="text"
               className="login-form__input"
+              errorMessage="Введите имя пользователя"
               ref={register({ required: true })}
+              errors={errors}
             />
-            {errors.username && "Введите имя пользователя"}
-            <input
+            <Input
               name="password"
               type="password"
               className="login-form__input"
+              errorMessage="Введите пароль"
               ref={register({ required: true })}
+              errors={errors}
             />
-            {errors.password && "Введите пароль"}
             {registerPage && secondPasswordInput}
             <div className="login-form__buttons">
               <button
