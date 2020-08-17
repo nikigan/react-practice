@@ -1,17 +1,23 @@
 import React from "react";
 import "./AppRouter.scss";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import ControlPanel from "../../pages/ControlPanel";
 import Home from "../../pages/Home";
 import EditPlace from "../../pages/EditPlace";
 import EditDish from "../../pages/EditDish";
 import LoginPage from "../../pages/LoginPage";
-import ProtectedRoute from "../../components/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute";
+import LoginRoute from "../LoginRoute";
 
 const AppRouter = () => {
   return (
     <Switch>
-      <Route path="/login" exact component={LoginPage} />
+      <LoginRoute path="/login" exact>
+        <LoginPage />
+      </LoginRoute>
+      <LoginRoute path="/register" exact>
+        <LoginPage />
+      </LoginRoute>
       <ProtectedRoute path="/owner/places" exact>
         <ControlPanel />
       </ProtectedRoute>

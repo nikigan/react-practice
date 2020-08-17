@@ -2,26 +2,26 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import "./ProtectedRoute.scss";
-import authService from "../../services/authService";
+import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({ children, ...rest }) => {
+  const { userToken } = useSelector((state) => state.auth);
+
   return (
     <Route
       {...rest}
-      render={
-        ({ location }) =>
-          authService.isAuth() ? (
-            children
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: location },
-              }}
-            />
-          )
-        // eslint-disable-next-line react/jsx-curly-newline
-      }
+      render={({ location }) => {
+        return userToken ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        );
+      }}
     />
   );
 };

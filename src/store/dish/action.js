@@ -1,6 +1,5 @@
 import { message } from "antd";
 import "antd/es/message/style/css";
-import history from "../../index";
 import { dish as dishActions } from "../actionTypes";
 import dishService from "../../services/dishService";
 
@@ -44,7 +43,7 @@ const onDishSave = ({ name, image, price, placeId, ingredients }) => async (
   }
 };
 
-const onDishDelete = (dishId) => async (dispatch) => {
+const onDishDelete = (dishId, history) => async (dispatch) => {
   try {
     await dishService.deleteDish(dishId);
 

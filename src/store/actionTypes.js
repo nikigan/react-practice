@@ -89,6 +89,7 @@ const auth = {
     success: "AUTH_LOGIN_SUCCESS",
     error: "AUTH_LOGIN_ERROR",
   },
+  logout: "AUTH_LOGOUT",
 };
 
 export { place, dish, ingredient, auth };

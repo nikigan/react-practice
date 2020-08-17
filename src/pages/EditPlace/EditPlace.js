@@ -12,7 +12,6 @@ import {
   onPlaceFetch,
   onPlaceSave,
   onTimeChanged,
-  // onPlaceClosed,
   onPlaceDelete,
   onDishesFetch,
 } from "../../store/place/action";
@@ -89,13 +88,13 @@ const EditPlace = () => {
     }
   };
 
+  const history = useHistory();
+
   const deleteHandler = () => {
-    dispatch(onPlaceDelete(id));
+    dispatch(onPlaceDelete(id.history));
   };
 
   const buttonText = id ? "Изменить" : "Сохранить";
-
-  const history = useHistory();
 
   const onDishClick = (dishId) => {
     history.push(`/owner/dishes/${dishId}`);

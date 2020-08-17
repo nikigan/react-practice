@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FormProvider, useForm } from "react-hook-form";
 import { Popconfirm, Spin } from "antd";
@@ -28,6 +28,8 @@ import IngredientsList from "../../components/IngredientsList";
 const EditDish = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const methods = useForm({
     mode: "onBlur",
     reValidateMode: "onChange",
@@ -64,7 +66,7 @@ const EditDish = () => {
   };
 
   const deleteHandler = () => {
-    dispatch(onDishDelete(id));
+    dispatch(onDishDelete(id, history));
   };
 
   useEffect(() => {

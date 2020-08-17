@@ -1,18 +1,11 @@
 import axios from "./serviceMethods";
 
-const authBase = async (username, password, path) => {
+const authBase = (username, password, path) => {
   const data = new FormData();
 
   data.append("username", username);
   data.append("password", password);
-
-  try {
-    const response = await axios.POST(path, data);
-    localStorage.setItem("token", response.data.token);
-    return response.data.user;
-  } catch (error) {
-    throw new Error(error);
-  }
+  return axios.POST(path, data);
 };
 
 export default {
@@ -21,11 +14,5 @@ export default {
   },
   registerUser(username, password) {
     return authBase(username, password, "users/");
-  },
-  isAuth() {
-    return localStorage.getItem("token");
-  },
-  logout() {
-    localStorage.removeItem("token");
   },
 };

@@ -4,6 +4,7 @@ const initialState = {
   username: null,
   userId: null,
   loading: false,
+  userToken: null,
 };
 
 const auth = (state = initialState, action) => {
@@ -11,6 +12,7 @@ const auth = (state = initialState, action) => {
     case authActions.login.started:
       return {
         ...state,
+        error: false,
         loading: true,
       };
 
@@ -20,6 +22,7 @@ const auth = (state = initialState, action) => {
         loading: false,
         username: action.payload.username,
         userId: action.payload.userId,
+        userToken: action.payload.userToken,
       };
 
     case authActions.login.error:
@@ -27,6 +30,11 @@ const auth = (state = initialState, action) => {
         ...state,
         error: true,
         loading: false,
+      };
+
+    case authActions.logout:
+      return {
+        ...initialState,
       };
     default:
       return state;

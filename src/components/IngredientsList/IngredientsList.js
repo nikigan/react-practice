@@ -24,6 +24,11 @@ const IngredientsList = () => {
     dispatch(onIngredientSelect(ingredientsList, ingredientId));
   };
 
+  const buttonStyle = (ing) =>
+    classNames("ingredients-list__item", {
+      "ingredients-list__item_selected": ing.selected,
+    });
+
   return (
     <>
       <div className="ingredients-list">
@@ -31,9 +36,7 @@ const IngredientsList = () => {
           <button
             type="button"
             key={ing.id}
-            className={classNames("ingredients-list__item", {
-              "ingredients-list__item_selected": ing.selected,
-            })}
+            className={buttonStyle(ing)}
             onClick={() => onIngredientClick(ing.id)}
           >
             {ing.name}

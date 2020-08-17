@@ -1,7 +1,6 @@
 import { message } from "antd";
 import "antd/es/message/style/css";
 import placesService from "../../services/placesService";
-import history from "../../index";
 import { place as placeActions } from "../actionTypes";
 import dishService from "../../services/dishService";
 
@@ -53,12 +52,12 @@ const onPlaceSave = ({ name, image, fromHour, toHour, address }) => async (
   }
 };
 
-const onPlaceDelete = (placeId) => async (dispatch) => {
+const onPlaceDelete = (placeId, history) => async (dispatch) => {
   try {
     await placesService.deletePlace(placeId);
 
     message.success("Заведение удалено");
-    history.goBack();
+    history.replace("/owner/places");
   } catch (error) {
     dispatch({
       type: placeActions.delete.error,
