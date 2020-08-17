@@ -12,7 +12,7 @@ const onIngredientsFetch = () => async (dispatch) => {
   });
 
   try {
-    const ingredients = await ingredientService.getIngredients();
+    const { data: ingredients } = await ingredientService.getIngredients();
     dispatch({
       type: ingredientActions.fetch.success,
       payload: ingredients,
@@ -52,7 +52,7 @@ const onIngredientModalShow = () => async (dispatch) => {
   });
 
   try {
-    const ingredients = await ingredientService.getIngredients();
+    const { data: ingredients } = await ingredientService.getIngredients();
 
     ingredients.map((item) => ({
       ...item,

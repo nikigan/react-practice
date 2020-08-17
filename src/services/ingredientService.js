@@ -1,25 +1,14 @@
 import axios from "./serviceMethods";
 
 export default {
-  async getIngredients() {
-    try {
-      const response = await axios.GET(`ingredients/`);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  getIngredients() {
+    return axios.GET(`ingredients/`);
   },
-  async addIngredient(name, calories) {
+  addIngredient(name, calories) {
     const data = new FormData();
 
     data.set("name", name);
     data.set("calories", calories);
-
-    try {
-      const response = await axios.POST(`ingredients/`, data);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+    return axios.POST(`ingredients/`, data);
   },
 };
