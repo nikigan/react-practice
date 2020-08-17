@@ -10,10 +10,10 @@ const onDishFetch = (dishId) => async (dispatch) => {
   });
 
   try {
-    const place = await dishService.getDish(dishId);
+    const { data: dish } = await dishService.getDish(dishId);
     dispatch({
       type: dishActions.fetch.success,
-      payload: place,
+      payload: dish,
     });
   } catch (error) {
     dispatch({

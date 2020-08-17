@@ -11,7 +11,7 @@ const onPlaceFetch = (placeId) => async (dispatch) => {
   });
 
   try {
-    const place = await placesService.getPlace(placeId);
+    const { data: place } = await placesService.getPlace(placeId);
     dispatch({
       type: placeActions.fetch.success,
       payload: { placeId, ...place },
@@ -25,7 +25,7 @@ const onPlaceFetch = (placeId) => async (dispatch) => {
 };
 
 const onDishesFetch = (placeId) => async (dispatch) => {
-  const dishes = await dishService.getDishes(placeId);
+  const { data: dishes } = await dishService.getDishes(placeId);
   dispatch({
     type: placeActions.dishes.fetched,
     payload: dishes,
