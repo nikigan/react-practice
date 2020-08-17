@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import store from "./store/store";
 import App from "./components/App/App";
 import "./assets/index.scss";
@@ -16,3 +17,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+export default createBrowserHistory();

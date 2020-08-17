@@ -3,11 +3,14 @@ import "./AppRouter.scss";
 import { Route, Switch } from "react-router-dom";
 import ControlPanel from "../../pages/ControlPanel";
 import Home from "../../pages/Home";
+import EditPlace from "../../pages/EditPlace";
 
 const AppRouter = () => {
   return (
     <Switch>
-      <Route path="/owner/places" component={ControlPanel} />
+      <Route path="/owner/places" exact component={ControlPanel} />
+      <Route path="/owner/places/new" exact component={EditPlace} />
+      <Route path="/owner/places/:id" exact component={EditPlace} />
       <Route path="/" component={Home} />
     </Switch>
   );

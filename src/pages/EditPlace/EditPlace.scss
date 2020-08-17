@@ -1,0 +1,34 @@
+/*
+ * EditPlace scss File
+*/
+@import "src/assets/scss/variables";
+
+.edit-place {
+  /* propertys here */
+  &__form-item {
+    margin-bottom: 50px;
+  }
+
+  &__button {
+    display: inline-block;
+    margin-right: 30px;
+    width: 170px;
+    padding: 10px 15px;
+    border: 1px solid $siberian-blue;
+    cursor: pointer;
+    background: $crystal-white;
+
+    &:disabled {
+      border-color: #272727;
+      background-color: #e9e9e9;
+    }
+  }
+
+  &__delete {
+    display: inline-block;
+    border: none;
+    text-decoration: underline;
+    background: none;
+    cursor: pointer;
+  }
+}

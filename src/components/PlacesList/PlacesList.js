@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./PlacesList.scss";
 import { Spin } from "antd";
 import "antd/es/spin/style/css";
+import { Link } from "react-router-dom";
 import Place from "../Place";
 import Error from "../Error";
 import { onPlacesFetch } from "../../store/places/actions";
@@ -30,12 +31,14 @@ const PlacesList = () => {
         {!fetching &&
           !error &&
           placesList.length > 0 &&
-          placesList.map((place) => <Place key={place.id} name={place.name} />)}
+          placesList.map((place) => (
+            <Place key={place.id} name={place.name} id={place.id} />
+          ))}
         {error && <Error message={errorMessage} />}
       </div>
-      <button type="button" className="places-list__btn">
+      <Link type="button" className="places-list__btn" to="places/new">
         Добавить заведение
-      </button>
+      </Link>
     </div>
   );
 };
