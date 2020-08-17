@@ -16,7 +16,7 @@ export default {
     data.set("place", placeId);
 
     if (Array.isArray(ingredients)) {
-      ingredients.forEach((i) => data.append("ingredients", i));
+      ingredients.forEach((i) => data.append("ingredients", i.id));
     } else {
       data.append("ingredients", ingredients);
     }
@@ -26,16 +26,22 @@ export default {
   editDish(name, image, price, placeId, ingredients, dishId) {
     const data = new FormData();
 
-    data.set("name", name);
+    if (name) {
+      data.set("name", name);
+    }
     if (image) {
       data.set("photo", image);
     }
-    data.set("price", price);
-    data.set("place", placeId);
+    if (price) {
+      data.set("price", price);
+    }
+    if (placeId) {
+      data.set("place", placeId);
+    }
 
     if (Array.isArray(ingredients)) {
-      ingredients.forEach((i) => data.append("ingredients", i));
-    } else {
+      ingredients.forEach((i) => data.append("ingredients", i.id));
+    } else if (ingredients) {
       data.append("ingredients", ingredients);
     }
 

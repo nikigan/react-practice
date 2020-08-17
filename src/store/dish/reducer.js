@@ -65,6 +65,18 @@ const dish = (state = initialState, action) => {
         errorMessage: action.payload,
       };
 
+    case dishActions.ingredient.deleted:
+      return {
+        ...state,
+        ingredients: state.ingredients.filter((i) => i.id !== action.payload),
+      };
+
+    case dishActions.ingredient.fetched:
+      return {
+        ...state,
+        ingredients: [...state.ingredients, ...action.payload],
+      };
+
     case dishActions.closed:
       return {
         ...initialState,

@@ -1,34 +1,32 @@
 import PropTypes from "prop-types";
 import React from "react";
-import "./DishSelect.scss";
-import { Link } from "react-router-dom";
+import "./ItemSelect.scss";
 
-// TODO: Рефактор компонента в обобщенный
-
-const ItemSelect = ({ label, items, path, buttonText }) => {
+const ItemSelect = ({ label, items, onItemClick, buttonText, onNewClick }) => {
   return (
-    <div className="dish-select edit-place__form-item">
-      <span className="dish-select__label">{label}</span>
-      <div className="dish-select__container">
+    <div className="item-select edit-place__form-item">
+      <span className="item-select__label">{label}</span>
+      <div className="item-select__container">
         {items.map((item) => {
           return (
-            <Link
+            <button
+              type="button"
               key={item.id}
-              className="dish-select__item"
-              to={`/owner/${path}/${item.id}`}
+              className="item-select__item"
+              onClick={() => onItemClick(item.id)}
             >
               {item.name}
-            </Link>
+            </button>
           );
         })}
       </div>
-      <Link
+      <button
         type="button"
-        className="btn dish-select__btn"
-        to="/owner/dishes/new"
+        className="btn item-select__btn"
+        onClick={onNewClick}
       >
         {buttonText}
-      </Link>
+      </button>
     </div>
   );
 };
@@ -38,12 +36,15 @@ export default ItemSelect;
 ItemSelect.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   label: PropTypes.string,
-  path: PropTypes.string.isRequired,
   buttonText: PropTypes.string,
+  onItemClick: PropTypes.func,
+  onNewClick: PropTypes.func,
 };
 
 ItemSelect.defaultProps = {
   items: [],
   label: "Список",
   buttonText: "Добавить",
+  onItemClick: null,
+  onNewClick: null,
 };
