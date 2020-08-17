@@ -113,6 +113,15 @@
             ]
           }
         }
+      ],
+      "react/jsx-props-no-spreading": [
+        "error",
+        {
+          "exceptions": [
+            "ProtectedRoute"
+          ],
+          "custom": "ignore"
+        }
       ]
     }
   },
