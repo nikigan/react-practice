@@ -72,6 +72,8 @@ const EditPlace = () => {
     }
   }, [address, name, setValue]);
 
+  const history = useHistory();
+
   const submitHandler = (data) => {
     const formData = {
       name: data.name,
@@ -84,14 +86,12 @@ const EditPlace = () => {
     if (id) {
       dispatch(onPlaceEdit({ placeId: id, ...formData }));
     } else {
-      dispatch(onPlaceSave(formData));
+      dispatch(onPlaceSave(formData, history));
     }
   };
 
-  const history = useHistory();
-
   const deleteHandler = () => {
-    dispatch(onPlaceDelete(id.history));
+    dispatch(onPlaceDelete(id, history));
   };
 
   const buttonText = id ? "Изменить" : "Сохранить";

@@ -27,6 +27,24 @@ const LoginPage = () => {
 
   const { loading } = useSelector((state) => state.auth);
 
+  const secondPasswordInput = (
+    <>
+      <input
+        name="passwordRepeat"
+        type="password"
+        className="login-form__input"
+        ref={register({
+          required: true,
+          validate: (value) => {
+            const { password } = getValues();
+            return password === value;
+          },
+        })}
+      />
+      {errors.passwordRepeat && "Пароли должны совпадать"}
+    </>
+  );
+
   return (
     <div className="login-page">
       <div className="login">
@@ -49,23 +67,7 @@ const LoginPage = () => {
               ref={register({ required: true })}
             />
             {errors.password && "Введите пароль"}
-            {registerPage && (
-              <>
-                <input
-                  name="passwordRepeat"
-                  type="password"
-                  className="login-form__input"
-                  ref={register({
-                    required: true,
-                    validate: (value) => {
-                      const { password } = getValues();
-                      return password === value;
-                    },
-                  })}
-                />
-                {errors.passwordRepeat && "Пароли должны совпадать"}
-              </>
-            )}
+            {registerPage && secondPasswordInput}
             <div className="login-form__buttons">
               <button
                 type="submit"

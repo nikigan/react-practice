@@ -61,7 +61,7 @@ const EditDish = () => {
         })
       );
     } else {
-      dispatch(onDishSave({ ...formData, placeId, ingredients }));
+      dispatch(onDishSave({ ...formData, placeId, ingredients }, history));
     }
   };
 

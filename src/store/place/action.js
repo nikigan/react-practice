@@ -31,18 +31,26 @@ const onDishesFetch = (placeId) => async (dispatch) => {
   });
 };
 
-const onPlaceSave = ({ name, image, fromHour, toHour, address }) => async (
-  dispatch
-) => {
+const onPlaceSave = (
+  { name, image, fromHour, toHour, address },
+  history
+) => async (dispatch) => {
   dispatch({
     type: placeActions.save.started,
   });
   try {
-    await placesService.addPlace(name, image, fromHour, toHour, address);
+    const { data } = await placesService.addPlace(
+      name,
+      image,
+      fromHour,
+      toHour,
+      address
+    );
     dispatch({
       type: placeActions.save.success,
     });
     message.success("Данные сохранены");
+    history.replace(`/owner/places/${data.id}`);
   } catch (error) {
     dispatch({
       type: placeActions.save.error,
