@@ -1,23 +1,13 @@
 import axios from "./serviceMethods";
 
 export default {
-  async getAllPlaces(ownerId = null) {
-    try {
-      const response = await axios.GET(`places/`, { owner: ownerId });
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  getAllPlaces(ownerId = null) {
+    return axios.GET(`places/`, { owner: ownerId });
   },
-  async getPlace(placeId) {
-    try {
-      const response = await axios.GET(`places/${placeId}`);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  getPlace(placeId) {
+    return axios.GET(`places/${placeId}`);
   },
-  async addPlace(name, image, fromHour, toHour, address) {
+  addPlace(name, image, fromHour, toHour, address) {
     const data = new FormData();
 
     data.set("name", name);
@@ -25,15 +15,9 @@ export default {
     data.set("from_hour", fromHour);
     data.set("to_hour", toHour);
     data.set("address", address);
-
-    try {
-      const response = await axios.POST(`places/`, data);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+    return axios.POST(`places/`, data);
   },
-  async editPlace(placeId, name, image, fromHour, toHour, address) {
+  editPlace(placeId, name, image, fromHour, toHour, address) {
     const data = new FormData();
 
     data.set("name", name);
@@ -43,20 +27,9 @@ export default {
     data.set("from_hour", fromHour);
     data.set("to_hour", toHour);
     data.set("address", address);
-
-    try {
-      const response = await axios.PATCH(`places/${placeId}`, data);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+    return axios.PATCH(`places/${placeId}`, data);
   },
-  async deletePlace(placeId) {
-    try {
-      const response = await axios.DELETE(`places/${placeId}`);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  deletePlace(placeId) {
+    return axios.DELETE(`places/${placeId}`);
   },
 };

@@ -1,23 +1,13 @@
 import axios from "./serviceMethods";
 
 export default {
-  async getDishes(placeId) {
-    try {
-      const response = await axios.GET(`dishes/`, { place: placeId });
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  getDishes(placeId) {
+    return axios.GET(`dishes/`, { place: placeId });
   },
-  async getDish(dishId) {
-    try {
-      const response = await axios.GET(`dishes/${dishId}`);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  getDish(dishId) {
+    return axios.GET(`dishes/${dishId}`);
   },
-  async addDish(name, image, price, placeId, ingredients) {
+  addDish(name, image, price, placeId, ingredients) {
     const data = new FormData();
 
     data.set("name", name);
@@ -31,14 +21,9 @@ export default {
       data.append("ingredients", ingredients);
     }
 
-    try {
-      const response = await axios.POST(`dishes/`, data);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+    return axios.POST(`dishes/`, data);
   },
-  async editDish(name, image, price, placeId, ingredients, dishId) {
+  editDish(name, image, price, placeId, ingredients, dishId) {
     const data = new FormData();
 
     if (name) {
@@ -60,19 +45,9 @@ export default {
       data.append("ingredients", ingredients);
     }
 
-    try {
-      const response = await axios.PATCH(`dishes/${dishId}`, data);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+    return axios.PATCH(`dishes/${dishId}`, data);
   },
-  async deleteDish(dishId) {
-    try {
-      const response = await axios.DELETE(`dishes/${dishId}`);
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  deleteDish(dishId) {
+    return axios.DELETE(`dishes/${dishId}`);
   },
 };
