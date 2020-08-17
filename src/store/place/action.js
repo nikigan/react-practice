@@ -2,7 +2,8 @@ import { message } from "antd";
 import "antd/es/message/style/css";
 import placesService from "../../services/placesService";
 import history from "../../index";
-import placeActions from "../actionTypes";
+import { place as placeActions } from "../actionTypes";
+import dishService from "../../services/dishService";
 
 const onPlaceFetch = (placeId) => async (dispatch) => {
   dispatch({
@@ -10,10 +11,10 @@ const onPlaceFetch = (placeId) => async (dispatch) => {
   });
 
   try {
-    const place = await placesService.getPlace(placeId);
+    const { data: place } = await placesService.getPlace(placeId);
     dispatch({
       type: placeActions.fetch.success,
-      payload: place,
+      payload: { placeId, ...place },
     });
   } catch (error) {
     dispatch({
@@ -21,6 +22,14 @@ const onPlaceFetch = (placeId) => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+const onDishesFetch = (placeId) => async (dispatch) => {
+  const { data: dishes } = await dishService.getDishes(placeId);
+  dispatch({
+    type: placeActions.dishes.fetched,
+    payload: dishes,
+  });
 };
 
 const onPlaceSave = ({ name, image, fromHour, toHour, address }) => async (
@@ -128,4 +137,5 @@ export {
   onPlaceEdit,
   onPlaceClosed,
   onPlaceDelete,
+  onDishesFetch,
 };

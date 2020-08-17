@@ -4,6 +4,9 @@ const place = {
     success: "PLACE_FETCH_SUCCESS",
     error: "PLACE_FETCH_ERROR",
   },
+  dishes: {
+    fetched: "PLACE_DISHES_FETCHED",
+  },
   save: {
     started: "PLACE_SAVE_STARTED",
     success: "PLACE_SAVE_SUCCESS",
@@ -24,4 +27,27 @@ const place = {
   closed: "PLACE_CLOSED",
 };
 
-export default place;
+const dish = {
+  fetch: {
+    started: "DISH_FETCH_STARTED",
+    success: "DISH_FETCH_SUCCESS",
+    error: "DISH_FETCH_ERROR",
+  },
+  save: {
+    started: "DISH_SAVE_STARTED",
+    success: "DISH_SAVE_SUCCESS",
+    error: "DISH_SAVE_ERROR",
+  },
+  delete: {
+    error: "DISH_DELETE_ERROR",
+  },
+  image: {
+    changed: "DISH_IMAGE_CHANGED",
+  },
+  input: {
+    changed: "DISH_INPUT_CHANGED",
+  },
+  closed: "DISH_CLOSED",
+};
+
+export { place, dish };

@@ -1,32 +1,28 @@
-import { place as placeActions } from "../actionTypes";
+import { dish as dishActions } from "../actionTypes";
 
 const initialState = {
   fetching: false,
   error: false,
-  errorMessage: "",
   success: false,
-  from_hour: "09:00:00",
-  to_hour: "21:00:00",
-  dishes: [],
+  ingredients: [],
 };
 
-const place = (state = initialState, action) => {
+const dish = (state = initialState, action) => {
   switch (action.type) {
-    case placeActions.fetch.started:
+    case dishActions.fetch.started:
       return {
         ...initialState,
         fetching: true,
         error: false,
-        errorMessage: "",
         success: false,
       };
-    case placeActions.fetch.success:
+    case dishActions.fetch.success:
       return {
         ...state,
         fetching: false,
         ...action.payload,
       };
-    case placeActions.fetch.error:
+    case dishActions.fetch.error:
       return {
         ...state,
         fetching: false,
@@ -34,46 +30,34 @@ const place = (state = initialState, action) => {
         errorMessage: action.payload,
       };
 
-    case placeActions.dishes.fetched:
+    case dishActions.image.changed:
       return {
         ...state,
-        dishes: action.payload,
-      };
-    case placeActions.image.changed:
-      return {
-        ...state,
-        image: action.payload,
+        photo: action.payload,
       };
 
-    case placeActions.input.changed:
+    case dishActions.input.changed:
       return {
         ...state,
         [action.payload.name]: action.payload.value,
       };
 
-    case placeActions.time.changed:
-      return {
-        ...state,
-        from_hour: action.payload.fromHour,
-        to_hour: action.payload.toHour,
-      };
-    case placeActions.save.started:
+    case dishActions.save.started:
       return {
         ...state,
         error: false,
         success: false,
-        errorMessage: "",
         fetching: true,
       };
 
-    case placeActions.save.success:
+    case dishActions.save.success:
       return {
         ...state,
         fetching: false,
         success: true,
       };
 
-    case placeActions.save.error:
+    case dishActions.save.error:
       return {
         ...state,
         fetching: false,
@@ -81,7 +65,7 @@ const place = (state = initialState, action) => {
         errorMessage: action.payload,
       };
 
-    case placeActions.closed:
+    case dishActions.closed:
       return {
         ...initialState,
       };
@@ -90,4 +74,4 @@ const place = (state = initialState, action) => {
   }
 };
 
-export default place;
+export default dish;

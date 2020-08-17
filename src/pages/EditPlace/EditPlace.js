@@ -12,14 +12,15 @@ import {
   onPlaceFetch,
   onPlaceSave,
   onTimeChanged,
-  onPlaceClosed,
+  // onPlaceClosed,
   onPlaceDelete,
+  onDishesFetch,
 } from "../../store/place/action";
 import TextInput from "../../components/TextInput";
 import ImageUpload from "../../components/ImageUpload";
 import TimePicker from "../../components/TimePicker";
 import "antd/es/time-picker/style/css";
-import DishSelect from "../../components/DishSelect";
+import ItemSelect from "../../components/ItemSelect";
 
 const EditPlace = () => {
   const { id } = useParams();
@@ -39,6 +40,8 @@ const EditPlace = () => {
     to_hour: toHour,
     address,
     fetching,
+    placeId,
+    dishes,
   } = useSelector((state) => state.place);
 
   const timeHandler = (_, timeString) => {
@@ -50,12 +53,15 @@ const EditPlace = () => {
   };
 
   useEffect(() => {
-    if (id) {
+    if (id !== placeId) {
       dispatch(onPlaceFetch(id));
     }
-    return () => {
-      dispatch(onPlaceClosed());
-    };
+  }, [dispatch, id, placeId]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(onDishesFetch(id));
+    }
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -88,17 +94,6 @@ const EditPlace = () => {
   };
 
   const buttonText = id ? "Изменить" : "Сохранить";
-
-  const dishes = [
-    {
-      id: 1,
-      name: "Блюдо 1",
-    },
-    {
-      id: 2,
-      name: "Блюдо 1",
-    },
-  ];
 
   return (
     <div className="edit-place">
@@ -138,7 +133,12 @@ const EditPlace = () => {
             onChange={inputHandler}
             validationText="Название должно быть длиннее 1 символа"
           />
-          <DishSelect dishes={dishes} label="Список блюд" />
+          <ItemSelect
+            items={dishes}
+            label="Список блюд"
+            path="dishes"
+            buttonText="Добавить блюдо"
+          />
           <button
             className="edit-place__button"
             type="submit"
