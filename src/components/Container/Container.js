@@ -9,7 +9,10 @@ const Container = ({ children }) => {
 export default Container;
 
 Container.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 };
 
 Container.defaultProps = {

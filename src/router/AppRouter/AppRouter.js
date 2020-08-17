@@ -1,6 +1,6 @@
 import React from "react";
 import "./AppRouter.scss";
-import { Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import ControlPanel from "../../pages/ControlPanel";
 import Home from "../../pages/Home";
 import EditPlace from "../../pages/EditPlace";
@@ -33,9 +33,9 @@ const AppRouter = () => {
       <ProtectedRoute path="/owner/dishes/:id" exact>
         <EditDish />
       </ProtectedRoute>
-      <ProtectedRoute path="/" exact>
+      <Route path="/" exact>
         <Home />
-      </ProtectedRoute>
+      </Route>
     </Switch>
   );
 };

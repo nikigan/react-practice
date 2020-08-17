@@ -1,0 +1,15 @@
+/*
+ * HomePlacesList scss File
+*/
+@import "src/assets/scss/variables";
+
+.home-places-list {
+  /* propertys here */
+  padding: 15px 0 15px 25px;
+  background: $crystal-white;
+
+  &__content {
+    overflow: auto;
+    height: calc(90vh - 100px);
+  }
+}

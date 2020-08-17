@@ -1,25 +1,30 @@
 import placesService from "../../services/placesService";
+import { places as placesActions } from "../actionTypes";
 
-export const onPlacesFetch = (userId) => async (dispatch) => {
+const onPlacesFetch = (userId = null) => async (dispatch) => {
   dispatch({
-    type: "PLACES_FETCH_STARTED",
+    type: placesActions.fetch.started,
   });
 
   try {
     const { data: places } = await placesService.getAllPlaces(userId);
 
     dispatch({
-      type: "PLACES_FETCH_SUCCESS",
+      type: placesActions.fetch.success,
       payload: places,
     });
   } catch (error) {
     dispatch({
-      type: "PLACES_FETCH_ERROR",
+      type: placesActions.fetch.error,
       payload: error.message,
     });
   }
 };
 
-export default {
-  onPlacesFetch,
+const onControlPanelClose = () => (dispatch) => {
+  dispatch({
+    type: placesActions.close,
+  });
 };
+
+export { onPlacesFetch, onControlPanelClose };

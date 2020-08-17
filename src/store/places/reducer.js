@@ -1,3 +1,5 @@
+import { places as placesActions } from "../actionTypes";
+
 const initialState = {
   fetching: false,
   error: false,
@@ -7,26 +9,30 @@ const initialState = {
 
 const places = (state = initialState, action) => {
   switch (action.type) {
-    case "PLACES_FETCH_STARTED":
+    case placesActions.fetch.started:
       return {
         ...state,
         fetching: true,
         error: false,
         errorMessage: "",
       };
-    case "PLACES_FETCH_SUCCESS":
+    case placesActions.fetch.success:
       return {
         ...state,
         fetching: false,
         placesList: [...action.payload],
       };
-    case "PLACES_FETCH_ERROR":
+    case placesActions.fetch.error:
       return {
         ...state,
         fetching: false,
         error: true,
         errorMessage: action.payload,
         placesList: [],
+      };
+    case placesActions.close:
+      return {
+        ...initialState,
       };
     default:
       return state;

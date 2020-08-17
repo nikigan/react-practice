@@ -33,6 +33,14 @@ const Header = () => {
     setExpanded(!expanded);
   };
 
+  const loginButtonHandler = () => {
+    if (username) {
+      dispatch(onLogout(history));
+    } else {
+      history.push("/login");
+    }
+  };
+
   return (
     <div className="header">
       <Container className="header__container">
@@ -51,18 +59,20 @@ const Header = () => {
             <Link className="header__link-item" to="/">
               Главная
             </Link>
-            <Link className="header__link-item" to="/owner/places">
-              Панель управления заведениями
-            </Link>
+            {username && (
+              <Link className="header__link-item" to="/owner/places">
+                Панель управления заведениями
+              </Link>
+            )}
           </div>
           <div className="header__user">
             {usernameBlock}
             <button
               type="button"
               className="header__logout"
-              onClick={() => dispatch(onLogout(history))}
+              onClick={loginButtonHandler}
             >
-              Выйти
+              {username ? "Выйти" : "Войти как владелец заведения"}
             </button>
           </div>
         </div>
