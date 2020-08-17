@@ -1,7 +1,53 @@
 /*
  * LoginPage scss File
 */
+@import "src/assets/scss/variables";
 
 .login-page {
   /* propertys here */
+  height: calc(90vh - 100px);
+  display: flex;
+  align-items: center;
+}
+.login {
+  padding: 25px 40px;
+  background: $crystal-white;
+  margin: auto;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  max-width: 100%;
+}
+
+.login-form {
+  &__input {
+    border: none;
+    margin-bottom: 20px;
+    width: 100%;
+    border-bottom: 1px solid $siberian-blue;
+    transition: border-bottom-width 0.3s;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+
+    &:focus {
+      border-bottom-width: 3px;
+      font-weight: 500;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    border: none;
+    cursor: pointer;
+  }
+
+  &__register-btn {
+    padding: 10px;
+    background: none;
+  }
 }

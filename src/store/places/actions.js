@@ -6,7 +6,8 @@ export const onPlacesFetch = () => async (dispatch) => {
   });
 
   try {
-    const places = await placesService.getAllPlaces(12);
+    const response = await placesService.getAllPlaces(12);
+    const places = response.data;
     dispatch({
       type: "PLACES_FETCH_SUCCESS",
       payload: places,

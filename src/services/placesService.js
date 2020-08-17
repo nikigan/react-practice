@@ -1,13 +1,8 @@
 import axios from "./serviceMethods";
 
 export default {
-  async getAllPlaces(ownerId = null) {
-    try {
-      const response = await axios.GET(`places/`, { owner: ownerId });
-      return response.data;
-    } catch (error) {
-      throw new Error(error);
-    }
+  getAllPlaces(ownerId = null) {
+    return axios.GET(`places/`, { owner: ownerId });
   },
   async getPlace(placeId) {
     try {

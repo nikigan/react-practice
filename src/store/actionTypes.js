@@ -83,4 +83,12 @@ const ingredient = {
   selected: "INGREDIENT_SELECTED",
 };
 
-export { place, dish, ingredient };
+const auth = {
+  login: {
+    started: "AUTH_LOGIN_STARTED",
+    success: "AUTH_LOGIN_SUCCESS",
+    error: "AUTH_LOGIN_ERROR",
+  },
+};
+
+export { place, dish, ingredient, auth };
