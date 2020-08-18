@@ -11,10 +11,8 @@ const HomePlacesList = () => {
   const { placesList, fetching } = useSelector((state) => state.places);
 
   useEffect(() => {
-    if (navigator) {
-      dispatch(onHomePlacesFetch());
-    }
-  }, [dispatch, navigator]);
+    dispatch(onHomePlacesFetch());
+  }, [dispatch]);
 
   return (
     <div className="home-places-list shadow">

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./PlaceCard.scss";
 import { Col, Row } from "antd";
 
@@ -17,17 +17,28 @@ const PlaceCard = ({ place }) => {
 
   const [distanceFormatted, setDistance] = useState(distance);
 
-  const [metric, setMetric] = useState("м");
+  const [metric, setMetric] = useState("");
+
+  const getDistance = useCallback((dist) => {
+    const distanceObj = {
+      unit: "м",
+      distance: dist,
+    };
+    if (dist > 1000 * 1000) {
+      distanceObj.distance = "Далеко";
+      distanceObj.unit = "";
+    } else if (dist > 1000) {
+      distanceObj.distance = (dist / 1000).toFixed(1);
+      distanceObj.unit = "км";
+    }
+    return distanceObj;
+  }, []);
 
   useEffect(() => {
-    if (distanceFormatted > 1000 * 100) {
-      setDistance("Далеко");
-      setMetric("");
-    } else if (distanceFormatted > 1000) {
-      setMetric("км");
-      setDistance((distanceFormatted / 1000).toFixed(1));
-    }
-  }, [distanceFormatted]);
+    const distanceValue = getDistance(distance);
+    setDistance(distanceValue.distance);
+    setMetric(distanceValue.unit);
+  }, [distance, getDistance]);
 
   const openedText = opened ? "Открыто" : "Закрыто";
 

@@ -1,7 +1,6 @@
-import moment from "moment";
-import { getDistance } from "geolib";
 import placesService from "../../services/placesService";
 import { places as placesActions } from "../actionTypes";
+import sortPlaces from "../../utils/placesUtils";
 
 const onPlacesFetch = (userId) => async (dispatch) => {
   dispatch({
@@ -32,26 +31,7 @@ const onHomePlacesFetch = () => async (dispatch) => {
     const { data: places } = await placesService.getAllPlaces();
 
     navigator.geolocation.getCurrentPosition(({ coords }) => {
-      const placesList = places
-        .map((place) => {
-          const distance = getDistance(
-            {
-              latitude: coords.latitude,
-              longitude: coords.longitude,
-            },
-            {
-              latitude: place.latitude_deg,
-              longitude: place.longitude_deg,
-            }
-          );
-
-          const from = moment(place.from_hour, "HH:mm:ss");
-          const to = moment(place.to_hour, "HH:mm:ss");
-          const opened = moment().isBetween(from, to);
-
-          return { ...place, distance, opened };
-        })
-        .sort((a, b) => a.distance - b.distance);
+      const placesList = sortPlaces(places, coords);
 
       dispatch({
         type: placesActions.fetch.success,
