@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PlaceCard.scss";
 import { Col, Row } from "antd";
 
@@ -19,7 +19,7 @@ const PlaceCard = ({ place }) => {
 
   const [metric, setMetric] = useState("");
 
-  const getDistance = useCallback((dist) => {
+  const getDistance = (dist) => {
     const distanceObj = {
       unit: "м",
       distance: dist,
@@ -32,13 +32,13 @@ const PlaceCard = ({ place }) => {
       distanceObj.unit = "км";
     }
     return distanceObj;
-  }, []);
+  };
 
   useEffect(() => {
     const distanceValue = getDistance(distance);
     setDistance(distanceValue.distance);
     setMetric(distanceValue.unit);
-  }, [distance, getDistance]);
+  }, [distance]);
 
   const openedText = opened ? "Открыто" : "Закрыто";
 
