@@ -11,9 +11,11 @@ import { onPlacesFetch } from "../../store/places/actions";
 const PlacesList = () => {
   const dispatch = useDispatch();
 
+  const { userId } = useSelector((state) => state.auth);
+
   useEffect(() => {
-    dispatch(onPlacesFetch());
-  }, [dispatch]);
+    dispatch(onPlacesFetch(userId));
+  }, [dispatch, userId]);
 
   const { placesList, fetching, error, errorMessage } = useSelector(
     (state) => state.places

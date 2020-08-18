@@ -1,6 +1,5 @@
 import { message } from "antd";
 import "antd/es/message/style/css";
-import history from "../../index";
 import { dish as dishActions } from "../actionTypes";
 import dishService from "../../services/dishService";
 
@@ -23,18 +22,27 @@ const onDishFetch = (dishId) => async (dispatch) => {
   }
 };
 
-const onDishSave = ({ name, image, price, placeId, ingredients }) => async (
-  dispatch
-) => {
+const onDishSave = (
+  { name, image, price, placeId, ingredients },
+  history
+) => async (dispatch) => {
   dispatch({
     type: dishActions.save.started,
   });
   try {
-    await dishService.addDish(name, image, price, placeId, ingredients);
+    const { data } = await dishService.addDish(
+      name,
+      image,
+      price,
+      placeId,
+      ingredients
+    );
     dispatch({
       type: dishActions.save.success,
     });
     message.success("Данные сохранены");
+
+    history.replace(`/owner/dishes/${data.id}`);
   } catch (error) {
     dispatch({
       type: dishActions.save.error,
@@ -44,7 +52,7 @@ const onDishSave = ({ name, image, price, placeId, ingredients }) => async (
   }
 };
 
-const onDishDelete = (dishId) => async (dispatch) => {
+const onDishDelete = (dishId, history) => async (dispatch) => {
   try {
     await dishService.deleteDish(dishId);
 

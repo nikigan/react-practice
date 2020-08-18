@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./Header.scss";
 import classNames from "classnames";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Container from "../Container";
+import { onLogout } from "../../store/auth/actions";
 
 const Header = () => {
   const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const username = "User";
+  const { username } = useSelector((state) => state.auth);
+
+  const usernameBlock = username && (
+    <>
+      <span>Вы вошли как</span>
+      <span className="header__user-name">{username}</span>
+    </>
+  );
 
   const onHeaderBlur = () => {
     setExpanded(false);
@@ -45,9 +56,12 @@ const Header = () => {
             </Link>
           </div>
           <div className="header__user">
-            Вы вошли как
-            <span className="header__user-name">{username}</span>
-            <button type="button" className="header__logout">
+            {usernameBlock}
+            <button
+              type="button"
+              className="header__logout"
+              onClick={() => dispatch(onLogout(history))}
+            >
               Выйти
             </button>
           </div>
@@ -56,5 +70,4 @@ const Header = () => {
     </div>
   );
 };
-
 export default Header;

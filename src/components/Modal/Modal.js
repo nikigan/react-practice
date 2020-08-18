@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import classNames from "classnames";
@@ -36,3 +36,9 @@ const Modal = ({ opened, onClose, children }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  children: PropTypes.element,
+  onClose: PropTypes.func,
+  opened: PropTypes.bool,
+};
