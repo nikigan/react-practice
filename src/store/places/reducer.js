@@ -5,6 +5,7 @@ const initialState = {
   error: false,
   errorMessage: "",
   placesList: [],
+  displayedPlaces: [],
 };
 
 const places = (state = initialState, action) => {
@@ -21,6 +22,7 @@ const places = (state = initialState, action) => {
         ...state,
         fetching: false,
         placesList: [...action.payload],
+        displayedPlaces: [...action.payload],
       };
     case placesActions.fetch.error:
       return {
@@ -29,10 +31,17 @@ const places = (state = initialState, action) => {
         error: true,
         errorMessage: action.payload,
         placesList: [],
+        displayedPlaces: [],
       };
     case placesActions.close:
       return {
         ...initialState,
+      };
+
+    case placesActions.filter:
+      return {
+        ...state,
+        displayedPlaces: [...action.payload],
       };
     default:
       return state;

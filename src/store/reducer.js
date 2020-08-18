@@ -4,6 +4,7 @@ import place from "./place/reducer";
 import dish from "./dish/reducer";
 import ingredient from "./ingredient/reducer";
 import auth from "./auth/reducer";
+import filters from "./filters/reducer";
 
 export default combineReducers({
   places,
@@ -11,4 +12,5 @@ export default combineReducers({
   dish,
   ingredient,
   auth,
+  filters,
 });
