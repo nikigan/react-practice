@@ -92,4 +92,13 @@ const auth = {
   logout: "AUTH_LOGOUT",
 };
 
-export { place, dish, ingredient, auth };
+const places = {
+  fetch: {
+    started: "PLACES_FETCH_STARTED",
+    success: "PLACES_FETCH_SUCCESS",
+    error: "PLACES_FETCH_ERROR",
+  },
+  close: "PLACES_CLOSED",
+};
+
+export { place, dish, ingredient, auth, places };

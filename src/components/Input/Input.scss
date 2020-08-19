@@ -1,14 +1,15 @@
 /*
  * Input scss File
 */
+@import "src/assets/scss/variables";
 
 .input {
   /* propertys here */
   &_error {
-    border-bottom-color: #ff0808;
+    border-bottom-color: $red;
   }
 
   &__error {
-    color: #ff0808;
+    color: $red;
   }
 }

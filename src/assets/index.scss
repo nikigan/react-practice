@@ -51,10 +51,14 @@
   &__val-text {
     margin-bottom: 0;
     margin-left: 20px;
-    color: #ff0808;
+    color: $red;
   }
 
   &_invalid {
-    border-bottom: 3px solid #ff0808;
+    border-bottom: 3px solid $red;
   }
+}
+
+.shadow {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
