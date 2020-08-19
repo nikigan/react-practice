@@ -4,10 +4,11 @@
 @import "src/assets/scss/variables";
 
 .place-card {
-  padding: 10px 15px;
-  border: 1px solid $siberian-blue;
-  margin-bottom: 20px;
-  margin-right: 20px;
+  display: block;
+  padding: 10px 25px;
+  &_bordered {
+    border: 1px solid $siberian-blue;
+  }
 
   &__name {
     display: block;

@@ -8,6 +8,7 @@ import EditDish from "../../pages/EditDish";
 import LoginPage from "../../pages/LoginPage";
 import ProtectedRoute from "../ProtectedRoute";
 import LoginRoute from "../LoginRoute";
+import PlacePage from "../../pages/PlacePage";
 
 const AppRouter = () => {
   return (
@@ -33,6 +34,9 @@ const AppRouter = () => {
       <ProtectedRoute path="/owner/dishes/:id" exact>
         <EditDish />
       </ProtectedRoute>
+      <Route path="/place/:id" exact>
+        <PlacePage />
+      </Route>
       <Route path="/" exact>
         <Home />
       </Route>

@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import "./PlaceCard.scss";
+import classNames from "classnames";
 import { Col, Row } from "antd";
+import { Link } from "react-router-dom";
 import { formatDistance } from "../../utils/placesUtils";
 
-const PlaceCard = ({ place }) => {
+const PlaceCard = ({ place, loading, bordered, className }) => {
   const {
     name,
     image,
@@ -14,6 +16,7 @@ const PlaceCard = ({ place }) => {
     address,
     distance,
     opened,
+    id,
   } = place;
 
   const [distanceFormatted, setDistance] = useState(distance);
@@ -28,8 +31,18 @@ const PlaceCard = ({ place }) => {
 
   const openedText = opened ? "Открыто" : "Закрыто";
 
+  const cardClass = classNames(
+    "place-card",
+    {
+      "place-card_bordered": bordered,
+    },
+    className
+  );
+
+  if (loading) return null;
+
   return (
-    <div className="place-card">
+    <Link className={cardClass} to={`/place/${id}`}>
       <Row>
         <Col span={12}>
           <div className="place-card__left">
@@ -46,7 +59,7 @@ const PlaceCard = ({ place }) => {
           <img src={image} alt={name} className="place-card__image" />
         </Col>
       </Row>
-    </div>
+    </Link>
   );
 };
 
@@ -54,4 +67,13 @@ export default PlaceCard;
 
 PlaceCard.propTypes = {
   place: PropTypes.objectOf(PropTypes.any).isRequired,
+  loading: PropTypes.bool,
+  bordered: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+PlaceCard.defaultProps = {
+  loading: false,
+  bordered: true,
+  className: "",
 };

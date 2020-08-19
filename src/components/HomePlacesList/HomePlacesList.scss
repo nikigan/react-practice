@@ -7,9 +7,11 @@
   /* propertys here */
   padding: 15px 0 15px 25px;
   background: $crystal-white;
+  overflow: hidden;
 
   &__content {
     overflow: auto;
-    height: calc(90vh - 100px);
+    height: calc(90vh - 150px);
+    padding-right: 15px;
   }
 }

@@ -1,0 +1,32 @@
+/*
+ * Dish scss File
+*/
+
+.dish {
+  /* propertys here */
+  height: 100%;
+  &__image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__desc {
+    padding: 10px 15px;
+  }
+
+  &__name {
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+
+  &__text-line {
+    display: block;
+  }
+
+  &__price {
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+}
