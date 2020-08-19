@@ -26,7 +26,7 @@ const HomePlacesList = () => {
     <div className="home-places-list shadow">
       <Spin spinning={fetching} tip="Загрузка...">
         <div className="home-places-list__content">
-          <Space direction="vertical" size="middle">
+          <Space direction="vertical" size="middle" style={{ width: "100%" }}>
             {!fetching && renderItem}
           </Space>
         </div>

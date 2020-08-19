@@ -13,6 +13,7 @@ import {
   onSearchInput,
   onSearchParams,
 } from "../../store/filters/actions";
+import onFilterChanged from "../../utils/filterUtils";
 
 const FilterBlock = () => {
   const dispatch = useDispatch();
@@ -20,18 +21,6 @@ const FilterBlock = () => {
   const { placesList } = useSelector((state) => state.places);
   const history = useHistory();
   const location = useLocation();
-
-  const onFilterChanged = (q, p, o) => {
-    let url = "?";
-    if (q.length > 0) {
-      url += `query=${q}&`;
-    }
-    url += `price=${p}&`;
-    if (o) {
-      url += `opened=true`;
-    }
-    history.push(url);
-  };
 
   useEffect(() => {
     if (placesList.length > 0) {
