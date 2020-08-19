@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import "./PlaceCard.scss";
 import { Col, Row } from "antd";
+import { formatDistance } from "../../utils/placesUtils";
 
 const PlaceCard = ({ place }) => {
   const {
@@ -19,23 +20,8 @@ const PlaceCard = ({ place }) => {
 
   const [metric, setMetric] = useState("");
 
-  const getDistance = (dist) => {
-    const distanceObj = {
-      unit: "м",
-      distance: dist,
-    };
-    if (dist > 1000 * 1000) {
-      distanceObj.distance = "Далеко";
-      distanceObj.unit = "";
-    } else if (dist > 1000) {
-      distanceObj.distance = (dist / 1000).toFixed(1);
-      distanceObj.unit = "км";
-    }
-    return distanceObj;
-  };
-
   useEffect(() => {
-    const distanceValue = getDistance(distance);
+    const distanceValue = formatDistance(distance);
     setDistance(distanceValue.distance);
     setMetric(distanceValue.unit);
   }, [distance]);

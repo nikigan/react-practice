@@ -24,4 +24,19 @@ const sortPlaces = (places, coords) => {
     .sort((a, b) => a.distance - b.distance);
 };
 
-export default sortPlaces;
+const formatDistance = (dist) => {
+  const distanceObj = {
+    unit: "м",
+    distance: dist,
+  };
+  if (dist > 1000 * 1000) {
+    distanceObj.distance = "Далеко";
+    distanceObj.unit = "";
+  } else if (dist > 1000) {
+    distanceObj.distance = (dist / 1000).toFixed(1);
+    distanceObj.unit = "км";
+  }
+  return distanceObj;
+};
+
+export { sortPlaces, formatDistance };
