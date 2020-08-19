@@ -3,6 +3,7 @@ import "antd/es/message/style/css";
 import placesService from "../../services/placesService";
 import { place as placeActions } from "../actionTypes";
 import dishService from "../../services/dishService";
+import { setDistanceAndOpened } from "../../utils/placesUtils";
 
 const onPlaceFetch = (placeId) => async (dispatch) => {
   dispatch({
@@ -11,9 +12,14 @@ const onPlaceFetch = (placeId) => async (dispatch) => {
 
   try {
     const { data: place } = await placesService.getPlace(placeId);
-    dispatch({
-      type: placeActions.fetch.success,
-      payload: { placeId, ...place },
+
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      const newPlace = setDistanceAndOpened(place, coords);
+
+      dispatch({
+        type: placeActions.fetch.success,
+        payload: { placeId, ...newPlace },
+      });
     });
   } catch (error) {
     dispatch({

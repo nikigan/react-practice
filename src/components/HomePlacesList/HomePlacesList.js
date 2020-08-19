@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./HomePlacesList.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { Empty, Spin } from "antd";
+import { Empty, Space, Spin } from "antd";
 import "antd/es/empty/style/css";
 import { onHomePlacesFetch } from "../../store/places/actions";
 import PlaceCard from "../PlaceCard";
@@ -26,7 +26,9 @@ const HomePlacesList = () => {
     <div className="home-places-list shadow">
       <Spin spinning={fetching} tip="Загрузка...">
         <div className="home-places-list__content">
-          {!fetching && renderItem}
+          <Space direction="vertical" size="middle" style={{ width: "100%" }}>
+            {!fetching && renderItem}
+          </Space>
         </div>
       </Spin>
     </div>
