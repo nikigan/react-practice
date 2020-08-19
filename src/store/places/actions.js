@@ -1,6 +1,6 @@
 import placesService from "../../services/placesService";
 import { places as placesActions } from "../actionTypes";
-import sortPlaces from "../../utils/placesUtils";
+import { sortPlaces } from "../../utils/placesUtils";
 
 const onPlacesFetch = (userId) => async (dispatch) => {
   dispatch({

@@ -1,26 +1,32 @@
 import React, { useEffect } from "react";
 import "./HomePlacesList.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { Spin } from "antd";
+import { Empty, Spin } from "antd";
+import "antd/es/empty/style/css";
 import { onHomePlacesFetch } from "../../store/places/actions";
 import PlaceCard from "../PlaceCard";
 
 const HomePlacesList = () => {
   const dispatch = useDispatch();
 
-  const { placesList, fetching } = useSelector((state) => state.places);
+  const { displayedPlaces, fetching } = useSelector((state) => state.places);
 
   useEffect(() => {
     dispatch(onHomePlacesFetch());
   }, [dispatch]);
 
+  const renderItem =
+    displayedPlaces.length > 0 ? (
+      displayedPlaces.map((place) => <PlaceCard key={place.id} place={place} />)
+    ) : (
+      <Empty description="Заведения не найдены" />
+    );
+
   return (
     <div className="home-places-list shadow">
       <Spin spinning={fetching} tip="Загрузка...">
         <div className="home-places-list__content">
-          {placesList.map((place) => (
-            <PlaceCard key={place.id} place={place} />
-          ))}
+          {!fetching && renderItem}
         </div>
       </Spin>
     </div>

@@ -99,6 +99,13 @@ const places = {
     error: "PLACES_FETCH_ERROR",
   },
   close: "PLACES_CLOSED",
+  filter: "PLACES_FILTER_APPLY",
 };
 
-export { place, dish, ingredient, auth, places };
+const filters = {
+  query: "FILTERS_QUERY",
+  price: "FILTERS_PRICE",
+  opened: "FILTERS_OPENED",
+};
+
+export { place, dish, ingredient, auth, places, filters };
